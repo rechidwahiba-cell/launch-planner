@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launch Planner | Wahiba Rechid</title>
+<meta name="description" content="Enter a launch date and get a dated before, during and after plan for a product or service launch.">
+<style>
+:root{--bg:#faf8f5;--card:#fff;--ink:#1d2433;--mute:#667085;--line:#e6e1d8;--accent:#1f4e79;--before:#1f4e79;--launch:#b4531a;--after:#2f6b4f}
+@media (prefers-color-scheme:dark){:root{--bg:#14171d;--card:#1c2029;--ink:#eef0f4;--mute:#9aa3b2;--line:#2c3240;--accent:#7fb0e0;--before:#7fb0e0;--launch:#f0a070;--after:#7fcaa0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Calibri,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:1.9rem;margin:0 0 4px}
+.lead{color:var(--mute);margin:0 0 24px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));align-items:end}
+label{display:grid;gap:4px;font-size:.85rem;color:var(--mute)}
+input,select,button{font:inherit;padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button{background:var(--accent);color:#fff;border-color:var(--accent);cursor:pointer;font-weight:600}
+button.ghost{background:transparent;color:var(--accent)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px;align-items:center}
+.progress{flex:1;min-width:160px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--after);transition:width .2s}
+.count{font-size:.85rem;color:var(--mute)}
+.phase{margin-top:24px}
+.phase h2{font-size:1.1rem;margin:0 0 8px;display:flex;gap:8px;align-items:center}
+.phase h2:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.step{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.step input{margin-top:5px;accent-color:var(--c)}
+.step .t{font-weight:600}
+.step .d{color:var(--mute);font-size:.9rem;grid-column:2}
+.step .when{font-size:.8rem;color:var(--c);font-weight:600;grid-column:2}
+.step.done .t{text-decoration:line-through;color:var(--mute)}
+footer{margin-top:40px;color:var(--mute);font-size:.85rem}
+footer a{color:var(--accent)}
+@media print{.panel,.bar button{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<main>
+<h1>Launch Planner</h1>
+<p class="lead">Pick a launch date and what you are launching. You get a dated plan with what to do before, on the day and after.</p>
+
+<form class="panel" id="f">
+  <label>Launch date<input type="date" id="date" required></label>
+  <label>What are you launching?
+    <select id="kind">
+      <option value="product">Software or digital product</option>
+      <option value="service">Service or offer</option>
+      <option value="program">Programme or event</option>
+    </select>
+  </label>
+  <label>Who buys?
+    <select id="aud">
+      <option value="b2b">Businesses (B2B)</option>
+      <option value="b2c">Individuals (B2C)</option>
+    </select>
+  </label>
+  <label>Budget
+    <select id="bud">
+      <option value="low">Small: mostly organic</option>
+      <option value="paid">Some paid media</option>
+    </select>
+  </label>
+  <button type="submit">Build my plan</button>
+</form>
+
+<div id="out" hidden>
+  <div class="bar">
+    <div class="progress"><i id="pb"></i></div>
+    <span class="count" id="cnt"></span>
+    <button class="ghost" type="button" id="copy">Copy as text</button>
+    <button class="ghost" type="button" id="print">Print</button>
+  </div>
+  <div id="plan"></div>
+</div>
+
+<footer>A generic method, free to use. Built by <a href="https://wahiba-rechid.vercel.app/">Wahiba Rechid</a>. Your ticks are saved in your browser only.</footer>
+</main>
+
+<script>
+// Each step: [days from launch, title, detail, phase, applies(kind, aud, bud)]
+const S = [
+ [-56,"Define who it is for and what changes for them","One sentence: for [who], who struggle with [problem], this is [what] that [benefit]. Everything else comes from this sentence.","b"],
+ [-56,"Set one goal and one number","Pick the single result that proves the launch worked (sign-ups, sales, bookings) and a target for 30 days after.","b"],
+ [-49,"Listen to 5 to 10 people in the target group","Short calls. Note the exact words they use for the problem. Reuse those words in your messages.","b"],
+ [-42,"Write the core message and three proof points","Headline, one-paragraph story, three proofs (a number, a demo, a testimonial). Test it on two people.","b"],
+ [-42,"Fix the offer: price, name, what is included","Decide before building assets. Changing the offer later breaks every asset.","b"],
+ [-35,"Build the landing page","One page, one action. Message from the step above, proof, a single button, a tracking tag.","b"],
+ [-35,"Set up tracking","Define the goal event, check it fires, and name your campaigns so results can be read later.","b"],
+ [-28,"Open a waiting list","Start collecting names now. Even a small list gives you a first audience on day one.","b","!"],
+ [-28,"Prepare sales and support material","One-page overview, answers to the ten likely questions, a short demo or walkthrough.","b","b2b"],
+ [-28,"Prepare the offer for individuals: visuals, short video, simple FAQ","Mobile first. Show the result before the features.","b","b2c"],
+ [-21,"Brief the team and partners","Who says what, who answers questions, who approves. Share the message and the date.","b"],
+ [-21,"Line up early advocates","Ask 5 to 10 people who know your work to try it first and say what they think. No pressure to praise.","b"],
+ [-14,"Plan the content calendar for launch week","One post or message a day: problem, story, proof, demo, offer, answers, thanks.","b"],
+ [-14,"Prepare the paid campaigns","Two audiences, two messages, a small daily budget. Nothing starts before launch day.","b","paid"],
+ [-14,"Prepare the email or message sequence","Announcement, reminder, last chance. Written and scheduled.","b"],
+ [-7,"Run a full dry run","Go through the journey as a customer on phone and computer. Fix every broken link and unclear sentence.","b"],
+ [-7,"Teaser to the waiting list and your network","Say the date, say the benefit, say where to follow.","b"],
+ [-1,"Final checklist","Page live, tracking working, payments or forms tested, messages scheduled, everyone knows their role.","b"],
+ [0,"Launch announcement","Publish the main post and send the first message to your list. Be present to answer comments within the hour.","l"],
+ [0,"Start paid campaigns","Switch on the prepared campaigns and check spend and clicks twice during the day.","l","paid"],
+ [0,"Personal outreach","Write directly to the 20 people most likely to care. Direct messages beat broadcasts on day one.","l"],
+ [1,"Answer everything and collect questions","Every question is content for the next post and a gap in the page.","l"],
+ [2,"Share first proof","First results, first feedback, a screenshot or a quote (with permission).","l"],
+ [3,"Reminder to the waiting list","Those who did not act yet. A different angle than the announcement.","l"],
+ [7,"First review against the goal","Look at the number you set. What worked, what did not, what to change this week.","a"],
+ [7,"Fix the biggest drop-off","Find the step where most people leave (page, form, price) and fix only that.","a"],
+ [10,"Publish a story from the launch","What you learned, with real numbers you are free to share.","a"],
+ [14,"Ask for feedback and testimonials","Ask the first customers two questions: what nearly stopped you, and what would you tell a friend.","a"],
+ [14,"Adjust budget and channels","Keep what produces the goal, stop what only produces clicks.","a","paid"],
+ [21,"Second wave of content","Use the best questions, objections and proof collected so far.","a"],
+ [30,"Final review and next steps","Result against the goal, three lessons, what to repeat, what to drop. Write it down in one page.","a"]
+];
+const PH={b:["Before the launch","var(--before)"],l:["Launch week","var(--launch)"],a:["After the launch","var(--after)"]};
+const $=id=>document.getElementById(id);
+const fmt=d=>d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
+let steps=[];
+function key(){return "lp:"+$("date").value+":"+$("kind").value+":"+$("aud").value+":"+$("bud").value}
+function load(){try{return JSON.parse(localStorage.getItem(key())||"{}")}catch(e){return{}}}
+function save(o){try{localStorage.setItem(key(),JSON.stringify(o))}catch(e){}}
+function build(){
+  const base=new Date($("date").value+"T12:00:00");
+  const aud=$("aud").value,bud=$("bud").value,kind=$("kind").value;
+  steps=S.filter(s=>{const c=s[4];return !c||c==="!"||c===aud||c===bud})
+   .map((s,i)=>{const d=new Date(base);d.setDate(d.getDate()+s[0]);return{i,off:s[0],title:s[1],det:s[2],ph:s[3],date:d}});
+  const done=load(),box=$("plan");box.innerHTML="";
+  ["b","l","a"].forEach(p=>{
+    const list=steps.filter(s=>s.ph===p);if(!list.length)return;
+    const sec=document.createElement("section");sec.className="phase";sec.style.setProperty("--c",PH[p][1]);
+    sec.innerHTML="<h2>"+PH[p][0]+"</h2>";
+    list.forEach(s=>{
+      const id="s"+s.i,el=document.createElement("div");el.className="step"+(done[id]?" done":"");
+      const when=s.off===0?"Launch day, ":s.off<0?(-s.off)+" days before, ":s.off+" days after, ";
+      el.innerHTML='<input type="checkbox" id="'+id+'"'+(done[id]?" checked":"")+'><label class="t" for="'+id+'"></label><div class="when"></div><div class="d"></div>';
+      el.querySelector(".t").textContent=s.title;el.querySelector(".d").textContent=s.det;el.querySelector(".when").textContent=when+fmt(s.date);
+      el.querySelector("input").addEventListener("change",e=>{const o=load();o[id]=e.target.checked;save(o);el.classList.toggle("done",e.target.checked);prog()});
+      sec.appendChild(el);
+    });
+    box.appendChild(sec);
+  });
+  $("out").hidden=false;prog();
+}
+function prog(){const o=load();const n=steps.filter(s=>o["s"+s.i]).length;$("pb").style.width=(100*n/steps.length)+"%";$("cnt").textContent=n+" of "+steps.length+" done"}
+function text(){return "Launch plan, launch date "+fmt(new Date($("date").value+"T12:00:00"))+"\n\n"+["b","l","a"].map(p=>PH[p][0].toUpperCase()+"\n"+steps.filter(s=>s.ph===p).map(s=>"- "+fmt(s.date)+": "+s.title).join("\n")).join("\n\n")}
+$("f").addEventListener("submit",e=>{e.preventDefault();build()});
+$("copy").addEventListener("click",()=>{const b=$("copy");(navigator.clipboard?navigator.clipboard.writeText(text()):Promise.reject()).then(()=>b.textContent="Copied",()=>b.textContent="Copy failed");setTimeout(()=>b.textContent="Copy as text",1800)});
+$("print").addEventListener("click",()=>window.print());
+const d=new Date();d.setDate(d.getDate()+60);$("date").value=d.toISOString().slice(0,10);
+</script>
+</body>
+</html>
