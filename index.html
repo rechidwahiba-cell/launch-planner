@@ -19,7 +19,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
 /* hero */
 .hero{background:var(--hero);color:#fff;position:relative;overflow:hidden;padding:56px 0 120px}
@@ -35,7 +35,7 @@ h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:
 /* form */
 .form{background:var(--card);border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);padding:24px;margin-top:-72px;position:relative;z-index:2;display:grid;gap:22px}
 .row{display:grid;gap:22px;grid-template-columns:1fr}
-@media(min-width:720px){.row{grid-template-columns:1fr 1fr}.row .full{grid-column:1/-1}}
+@media(min-width:720px) and (max-width:979px){.row{grid-template-columns:1fr 1fr}.row .full{grid-column:1/-1}}
 .q{display:grid;gap:8px;min-width:0;border:0;padding:0;margin:0}
 .q>legend,.q>label.lab{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:0}
 .seg{display:flex;flex-wrap:wrap;gap:8px}
@@ -137,6 +137,18 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,
 .tll{position:absolute;left:0;right:0;top:46px;display:flex;justify-content:space-between;font-size:.76rem;color:var(--mute);font-weight:600}
 .tll .lz{position:absolute;transform:translateX(-50%);color:var(--launch);white-space:nowrap}
 .r.late .rd small{color:#c8412b;font-weight:700}
+.form .seg small{display:none}
+.form .seg span{padding:9px 12px;font-size:.9rem}
+@media(max-width:560px){.r.edit .rh>input[type=text]{grid-column:1/-1}.r.edit .rh{grid-template-columns:1fr auto auto}.form{padding:18px;gap:16px}.form .row{gap:14px}.hero{padding:36px 0 104px}}
+.hint{margin:-8px 0 14px;color:var(--mute);font-size:.92rem}
+@media(min-width:980px){
+  main.wrap{display:grid;grid-template-columns:340px minmax(0,1fr);gap:28px;align-items:start}
+  .form{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;padding:20px;gap:18px}
+  .form .row{gap:14px}
+  .form input[type=date],.form input[type=text]{padding:9px 12px}
+  .cta{display:none}
+  #out{margin-top:24px}
+}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 
@@ -150,8 +162,8 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
 <header class="hero">
   <div class="wrap">
     <span class="eyebrow"><i></i>Free launch tool</span>
-    <h1>Your launch, <em>planned</em><br>in ten seconds.</h1>
-    <p>Pick a date and answer three questions. Get a dated plan for what to do before, during and after your launch.</p>
+    <h1>Your launch, <em>planned</em><br>in seconds.</h1>
+    <p>Pick a date and a few options. The plan updates as you choose: what to do before, during and after your launch.</p>
   </div>
 </header>
 
@@ -199,11 +211,12 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
         </div>
       </fieldset>
     </div>
-    <button class="cta" type="submit">Build my launch plan →</button>
+    <button class="cta" type="submit">See my launch plan ↓</button>
   </form>
 
   <section id="out" hidden aria-live="polite">
     <h2 class="ptitle" id="ptitle"></h2>
+    <p class="hint" id="hint">This is an example. Change the date and the options to make it yours.</p>
     <div class="alert" id="alert" hidden></div>
     <div class="stats">
       <div class="stat"><div><b id="days">0</b><span id="dayslabel">days to launch</span></div></div>
@@ -220,11 +233,8 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
     <div class="tools">
       <button type="button" id="xlsx" class="main">⬇ Download Excel</button>
       <button type="button" id="ics">📅 Add to calendar</button>
-      <button type="button" id="copy">📋 Copy as text</button>
       <button type="button" id="share">👥 Share with team</button>
       <button type="button" id="mail">✉ Send by email</button>
-      <button type="button" id="alerts">🔔 Turn on alerts</button>
-      <button type="button" id="print">🖨 Print</button>
       <button type="button" id="reset">↺ Reset statuses</button>
     </div>
 
@@ -234,7 +244,6 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
       <button type="button" id="restore" class="link" hidden>Restore the suggested plan</button>
     </div>
     <div class="tabs" id="tabs" role="tablist"></div>
-    <div class="filters" id="filters"></div>
     <div class="table" id="plan"></div>
   </section>
 </main>
@@ -338,13 +347,6 @@ function render(){
     b.innerHTML="<b>"+PH[p].n+"</b><small>"+n+" of "+list.length+" done</small><span class='mini'><i style='width:"+(100*n/list.length)+"%'></i></span>";
     b.addEventListener("click",()=>{tab=p;render()});$("tabs").appendChild(b);
   });
-  // status filters
-  $("filters").innerHTML="";
-  ST.forEach(([k,l])=>{
-    const n=steps.filter(s=>st(o,s)===k).length;
-    const c=document.createElement("button");c.type="button";c.className="chip";c.dataset.s=k;c.setAttribute("aria-pressed",filter===k);
-    c.innerHTML="<i></i>"+l+" · "+n;c.addEventListener("click",()=>{filter=filter===k?null:k;render()});$("filters").appendChild(c);
-  });
   // rows
   const box=$("plan");box.innerHTML="";box.style.setProperty("--c",PH[tab].c);
   const list=steps.filter(s=>s.ph===tab&&(!filter||st(o,s)===filter));
@@ -407,7 +409,6 @@ function render(){
     al.appendChild(ul);
     const more=lateL.length+soon.length-5;if(more>0){const m=document.createElement("small");m.textContent="and "+more+" more in the plan";al.appendChild(m)}
   }
-  notify(lateL.length,soon.length);
   const pos=x=>Math.max(0,Math.min(100,(x+56)/86*100)),td=-diff,sh=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
   $("tlbar").innerHTML='<div class="track"><i style="flex:56;background:'+PH.b.c+'"></i><i style="flex:7;background:'+PH.l.c+'"></i><i style="flex:23;background:'+PH.a.c+'"></i></div>'
     +steps.map(s=>'<span class="dot" data-s="'+st(o,s)+'" style="left:'+pos(s.off)+'%" title="'+s.title.replace(/"/g,"&quot;")+'"></span>').join("")
@@ -419,15 +420,6 @@ function render(){
     nx.innerHTML="<small>"+(cur.date<today()?"Overdue":"Up next")+" · "+fmt(cur.date)+" · "+LBL[st(o,cur)]+"</small><h3></h3><p></p>";
     nx.querySelector("h3").textContent=cur.title;nx.querySelector("p").textContent=cur.det;
   }
-}
-function text(){const o=load();return (nm()?nm()+": launch plan":"Launch plan")+", launch date "+fmt(launch)+"\n\n"+["b","l","a"].map(p=>PH[p].n.toUpperCase()+"\n"+steps.filter(s=>s.ph===p).map(s=>"- "+fmt(s.date)+" ["+LBL[st(o,s)]+"] "+s.title).join("\n")).join("\n\n")}
-function ics(){
-  const pad=n=>String(n).padStart(2,"0"),ds=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
-  const esc=t=>t.replace(/[\\,;]/g,m=>"\\"+m).replace(/\n/g,"\\n");
-  const ev=steps.map(s=>{const e=new Date(s.date);e.setDate(e.getDate()+1);
-    return["BEGIN:VEVENT","UID:lp-"+ds(launch)+"-"+s.i+"@launch-planner","DTSTAMP:"+ds(new Date())+"T000000Z","DTSTART;VALUE=DATE:"+ds(s.date),"DTEND;VALUE=DATE:"+ds(e),"SUMMARY:"+esc((nm()||"Launch")+": "+s.title),"DESCRIPTION:"+esc(s.det),"BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc("Tomorrow: "+s.title),"TRIGGER:-PT15H","END:VALARM","BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc("Today: "+s.title),"TRIGGER:PT9H","END:VALARM","END:VEVENT"].join("\r\n")});
-  const blob=new Blob(["BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Launch Planner//EN\r\n"+ev.join("\r\n")+"\r\nEND:VCALENDAR\r\n"],{type:"text/calendar"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="launch-plan.ics";document.body.appendChild(a);a.click();a.remove();
 }
 // ---- Excel export: a real .xlsx built in the browser, no library ----
 const X=t=>String(t).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
@@ -483,7 +475,7 @@ document.querySelectorAll("#mode [data-m]").forEach(b=>b.addEventListener("click
 }));
 $("restore").addEventListener("click",()=>{try{localStorage.removeItem(key()+":c")}catch(e){}compute();persist();render()});
 $("f").addEventListener("submit",e=>{e.preventDefault();build()});
-$("copy").addEventListener("click",e=>{(navigator.clipboard?navigator.clipboard.writeText(text()):Promise.reject()).then(()=>flash(e.target,"✓ Copied"),()=>flash(e.target,"Copy failed"))});
+$("f").addEventListener("input",e=>{$("hint").hidden=true;if(e.target.id==="name")render();else if($("date").value)build(true)});
 const link=()=>location.origin+location.pathname+"?d="+$("date").value+"&k="+val("kind")+"&a="+val("aud")+"&b="+val("bud")+"&f="+val("adm");
 $("share").addEventListener("click",e=>{
   const d={title:nm()||"Launch plan",text:"Our launch plan, launch date "+fmt(launch),url:link()};
@@ -495,18 +487,6 @@ $("mail").addEventListener("click",()=>{
   const body="Hello,\n\nHere is our launch plan. Launch date: "+fmt(launch)+".\n\nNext steps:\n"+up.map(s=>"- "+fmt(s.date)+": "+s.title+" ["+LBL[st(o,s)]+"]").join("\n")+"\n\nFull plan: "+link()+"\n";
   location.href="mailto:?subject="+encodeURIComponent((nm()||"Launch plan")+": launch on "+fmt(launch))+"&body="+encodeURIComponent(body);
 });
-function notify(l,n){try{
-  if(!("Notification"in window)||Notification.permission!=="granted"||localStorage.getItem("lp-alerts")!=="1"||!(l||n))return;
-  const k="lp-alerted:"+key(),d=new Date().toDateString();if(localStorage.getItem(k)===d)return;localStorage.setItem(k,d);
-  new Notification((nm()||"Launch plan")+": "+(l?l+" overdue":"")+(l&&n?", ":"")+(n?n+" due this week":""),{body:"Open your launch plan to see what to do next."});
-}catch(e){}}
-$("alerts").addEventListener("click",async e=>{
-  if(!("Notification"in window))return flash(e.target,"Not supported here");
-  const p=await Notification.requestPermission();
-  if(p==="granted"){try{localStorage.setItem("lp-alerts","1");localStorage.removeItem("lp-alerted:"+key())}catch(x){}flash(e.target,"✓ Alerts on");render()}
-  else flash(e.target,"Blocked by browser");
-});
-$("print").addEventListener("click",()=>window.print());
 $("ics").addEventListener("click",ics);
 $("reset").addEventListener("click",()=>{save({});render()});
 const d=new Date();d.setDate(d.getDate()+60);$("date").value=d.toISOString().slice(0,10);
@@ -514,8 +494,8 @@ const q=new URLSearchParams(location.search);
 if(/^\d{4}-\d\d-\d\d$/.test(q.get("d")||"")){
   $("date").value=q.get("d");
   [["kind","k"],["aud","a"],["bud","b"],["adm","f"]].forEach(([n,k])=>{const v=q.get(k)||"";if(/^[a-z0-9]+$/.test(v)){const el=document.querySelector('input[name="'+n+'"][value="'+v+'"]');if(el)el.checked=true}});
-  build(true);
 }
+build(true);
 </script>
 </body>
 </html>
