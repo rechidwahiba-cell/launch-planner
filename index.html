@@ -82,6 +82,8 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,
 .mode{display:flex;gap:6px;align-items:center;margin-top:24px;flex-wrap:wrap}
 .mode button[data-m]{font:inherit;font-weight:600;font-size:.9rem;padding:8px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .mode button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip2{font:inherit;font-weight:600;font-size:.85rem;padding:7px 12px;border-radius:99px;border:1.5px dashed var(--line);background:none;color:var(--ink);cursor:pointer;margin-left:6px}
+.chip2[aria-pressed=true]{border-style:solid;border-color:var(--gold);background:color-mix(in srgb,var(--gold) 20%,var(--card))}
 .mode .link{font:inherit;font-size:.85rem;background:none;border:0;color:var(--mute);text-decoration:underline;cursor:pointer;margin-left:auto}
 .r.edit .rh{grid-template-columns:140px 1fr auto auto auto}
 .r.edit input,.r.edit textarea{font:inherit;font-size:.92rem;font-weight:500;padding:7px 9px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
@@ -238,23 +240,23 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
     <div class="next" id="next"></div>
 
     <div class="tools">
-      <button type="button" id="xlsx" class="main">⬇ Download Excel</button>
-      <button type="button" id="ics">📅 Add to calendar</button>
-      <button type="button" id="share">👥 Share with team</button>
-      <button type="button" id="mail">✉ Send by email</button>
-      <button type="button" id="reset">↺ Reset statuses</button>
+      <button type="button" id="xlsx" class="main">Download Excel</button>
+      <button type="button" id="ics">Add to calendar</button>
+      <button type="button" id="share">Share with team</button>
+      <button type="button" id="mail">Send by email</button>
+      <button type="button" id="reset">Reset statuses</button>
     </div>
 
     <div class="mode" id="mode" role="group" aria-label="Plan version">
       <button type="button" data-m="sug">Suggested plan</button>
-      <button type="button" data-m="mine">✎ My version</button>
+      <button type="button" data-m="mine">My version</button>
+      <button type="button" id="ess" class="chip2" aria-pressed="false">Essentials only</button>
       <button type="button" id="restore" class="link" hidden>Restore the suggested plan</button>
     </div>
     <div class="tabs" id="tabs" role="tablist"></div>
     <div class="table" id="plan"></div>
     <section class="method">
       <h2>The method behind this plan</h2>
-      <p>Four habits from more than ten years of launching products, services and programmes.</p>
       <div class="m3">
         <div><b>1. One shared tracker</b><span>Launches go wrong on forgotten tasks and on information that never reached the team. One file, open to everyone, with an owner on every line.</span></div>
         <div><b>2. Approvals and budget first</b><span>Approval delays and late budget questions slow a launch more than anything else. Who approves, how fast and how much are agreed in the first week.</span></div>
@@ -274,8 +276,8 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
 const S=[
  [-56, "Define who it is for and what changes for them", "One sentence: for [who], who struggle with [problem], this is [what] that [benefit]. Everything else comes from this sentence.", "b"],
  [-56, "Set one goal and one number", "Pick the single result that proves the launch worked (sign-ups, sales, bookings) and a target for 30 days after.", "b"],
- [-56, "Create one shared tracker and name an owner for every step", "One file that everyone can open, with the step, the owner, the date and the status. This plan can be that file: export it and share it.", "b", null, "Most launch problems I have seen come from missing information, not missing skill: tasks forgotten, updates that never reached the team. One tracker, shared widely, fixes most of it."],
- [-56, "Agree who approves what, and how fast", "Name one approver for each kind of decision (message, visuals, budget) and agree a reply time, for example two working days.", "b", null, "In my experience, approval delays are what slows a launch down the most. Agree the reply time before the work starts, not when the first asset is already waiting."],
+ [-56, "Create one shared tracker and name an owner for every step", "One file that everyone can open, with the step, the owner, the date and the status. This plan can be that file: export it and share it.", "b", null, "Most launch problems come from missing information, not missing skill: tasks forgotten, updates that never reached the team. One tracker, shared widely, fixes most of it."],
+ [-56, "Agree who approves what, and how fast", "Name one approver for each kind of decision (message, visuals, budget) and agree a reply time, for example two working days.", "b", null, "Approval delays are often what slows a launch down the most. Agree the reply time before the work starts, not when the first asset is already waiting."],
  [-56, "Fix the date, the capacity and the venue or platform", "Everything else depends on these three. Confirm them in writing before you announce anything.", "b", "program"],
  [-49, "Listen to 5 to 10 people in the target group", "Short calls. Note the exact words they use for the problem, and reuse those words in your messages.", "b"],
  [-49, "Get the budget approved, with a reserve", "One total, split by line (production, media, tools), plus a share kept aside for surprises. Agree who is allowed to spend it.", "b", null, "Budget questions that arrive late block everything else. Settle the amount before production starts."],
@@ -296,7 +298,7 @@ const S=[
  [-28, "Prepare a short video and a simple FAQ", "Mobile first. Show the result before the features.", "b", "b2c"],
  [-28, "List 30 target accounts or contacts", "Named people you will write to personally on launch day.", "b", "service"],
  [-28, "Confirm speakers, partners and the detailed programme", "Get each confirmation in writing, with what they need from you.", "b", "program"],
- [-21, "Brief the team and partners", "Who says what, who answers questions, who approves. Share the message, the date and the tracker.", "b", null, "Share more than feels necessary. I would rather send my tracking file to too many people than have one person miss a change."],
+ [-21, "Brief the team and partners", "Who says what, who answers questions, who approves. Share the message, the date and the tracker.", "b", null, "Share more than feels necessary. Better to send the tracker to too many people than to have one person miss a change."],
  [-21, "Line up early advocates", "Ask 5 to 10 people who know your work to try it first and say what they think. No pressure to praise.", "b"],
  [-21, "Fix what beta testers found and write the onboarding", "Welcome email, first-use guide, help page. A new user should reach a first result without asking anyone.", "b", "product"],
  [-17, "Send the assets for approval, with a reply date", "Group them and send them once, to the approvers named at the start, with the date you need the answer by.", "b"],
@@ -305,11 +307,11 @@ const S=[
  [-14, "Prepare the email or message sequence", "Announcement, reminder, last chance. Written and scheduled.", "b"],
  [-14, "Prepare the proposal and quote template", "So that a quote can leave within the day when a lead asks.", "b", "service"],
  [-14, "Send a reminder: last places and deadline", "To everyone who showed interest but has not registered yet.", "b", "program"],
- [-10, "Proofread and approve every asset", "Read everything once more, then ask a second person to do the same: links, dates, prices, names, spelling.", "b", null, "I reread everything and have it reread. A wrong date or a broken link on launch day costs more credibility than a late post."],
+ [-10, "Proofread and approve every asset", "Read everything once more, then ask a second person to do the same: links, dates, prices, names, spelling.", "b", null, "A wrong date or a broken link on launch day costs more credibility than a late post."],
  [-7, "Run a full dry run", "Go through the journey as a customer, on phone and computer. Fix every broken link and unclear sentence.", "b"],
  [-7, "Send a teaser to the waiting list and your network", "Say the date, say the benefit, say where to follow.", "b"],
  [-3, "Send practical information to everyone registered", "Time, place or link, what to bring, who to contact.", "b", "program"],
- [-1, "Final checklist", "Page live, tracking working, payments or forms tested, messages scheduled, everyone knows their role.", "b", null, "Set a reminder for each owner the day before. I put reminders on every step, so that nothing depends on memory."],
+ [-1, "Final checklist", "Page live, tracking working, payments or forms tested, messages scheduled, everyone knows their role.", "b", null, "Set a reminder for each owner the day before, so that nothing depends on memory."],
  [0, "Launch announcement", "Publish the main post and send the first message to your list. Be there to answer comments within the hour.", "l"],
  [0, "Start the paid campaigns", "Switch on the prepared campaigns and check spend and clicks twice during the day.", "l", "paid"],
  [0, "Write personally to the 20 people most likely to care", "Direct messages beat broadcasts on day one.", "l"],
@@ -336,6 +338,7 @@ const S=[
  [21, "Follow up unpaid invoices and unanswered quotes", "A short, polite reminder with the document attached again.", "a", "adm"],
  [30, "Final review and next steps", "Result against the goal, three lessons, what to repeat, what to drop. Write it on one page.", "a", null, "Keep the tracker. It is the starting point of your next launch."]
 ];
+const ESS=new Set(["Define who it is for and what changes for them","Set one goal and one number","Create one shared tracker and name an owner for every step","Agree who approves what, and how fast","Write the core message and three proof points","Build the landing page","Brief and start production of every launch asset","Proofread and approve every asset","Run a full dry run","Final checklist","Launch announcement","Answer everything and collect questions","First review against the goal","Final review and next steps"]);
 const PH={b:{n:"Strategy",c:"var(--before)"},p:{n:"Production",c:"var(--prod)"},l:{n:"Launch week",c:"var(--launch)"},a:{n:"After the launch",c:"var(--after)"}};
 const $=id=>document.getElementById(id);
 const val=n=>document.querySelector('input[name="'+n+'"]:checked').value;
@@ -348,10 +351,11 @@ const LBL=Object.fromEntries(ST);
 const key=()=>"lp3:"+$("date").value+":"+val("kind")+":"+val("aud")+":"+val("bud")+":"+val("adm");
 const load=()=>{try{return JSON.parse(localStorage.getItem(key())||"{}")}catch(e){return{}}};
 const save=o=>{try{localStorage.setItem(key(),JSON.stringify(o))}catch(e){}};
-let mode="sug";
+let mode="sug",ess=false,touched=false;
+try{ess=localStorage.getItem("lp-ess")==="1"}catch(e){}
 const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const loadC=()=>{try{const c=JSON.parse(localStorage.getItem(key()+":c")||"null");return Array.isArray(c)&&c.length?c:null}catch(e){return null}};
-const persist=()=>{try{localStorage.setItem(key()+":c",JSON.stringify(steps.map(s=>({i:s.i,title:s.title,det:s.det,ph:s.ph,adm:!!s.adm,d:iso(s.date)}))))}catch(e){}};
+const persist=()=>{try{localStorage.setItem(key()+":c",JSON.stringify(steps.map(s=>({i:s.i,title:s.title,det:s.det,ph:s.ph,adm:!!s.adm,ess:!!s.ess,d:iso(s.date)}))))}catch(e){}};
 const st=(o,s)=>o["s"+s.i]||"todo";
 const today=()=>{const t=new Date();t.setHours(12,0,0,0);return t};
 
@@ -367,9 +371,9 @@ function compute(){
   const on=[val("aud"),val("bud"),val("adm"),val("kind")],ok=c=>c[0]==="!"?!on.includes(c.slice(1)):on.includes(c);
   steps=S.filter(s=>[].concat(s[4]||[]).every(ok)).map((s,i)=>{
     const d=new Date(launch);d.setDate(d.getDate()+s[0]);
-    return{i,off:s[0],title:wording(s[1]),det:s[2],ph:s[3]==="b"&&s[0]>=-28?"p":s[3],tip:s[5]||"",date:d,adm:[].concat(s[4]||[]).includes("adm")};
+    return{i,off:s[0],title:wording(s[1]),det:s[2],ph:s[3]==="b"&&s[0]>=-28?"p":s[3],tip:s[5]||"",ess:ESS.has(s[1]),date:d,adm:[].concat(s[4]||[]).includes("adm")};
   });
-  if(mode==="mine"){const c=loadC();if(c)steps=c.map(x=>{const d=new Date(x.d+"T12:00:00");return{i:x.i,title:String(x.title),det:String(x.det||""),ph:PH[x.ph]?x.ph:"b",adm:!!x.adm,date:d,off:Math.round((d-launch)/DAY)}})}
+  if(mode==="mine"){const c=loadC();if(c)steps=c.map(x=>{const d=new Date(x.d+"T12:00:00");return{i:x.i,title:String(x.title),det:String(x.det||""),ph:PH[x.ph]?x.ph:"b",adm:!!x.adm,ess:!!x.ess,tip:"",date:d,off:Math.round((d-launch)/DAY)}})}
   steps.sort((a,b)=>a.date-b.date||a.i-b.i);
 }
 function build(quiet){
@@ -385,22 +389,22 @@ function render(){
   // tabs
   $("tabs").innerHTML="";
   ["b","p","l","a"].forEach(p=>{
-    const list=steps.filter(s=>s.ph===p),n=list.filter(s=>st(o,s)==="done").length;
+    const list=steps.filter(s=>s.ph===p&&(!ess||s.ess)),n=list.filter(s=>st(o,s)==="done").length;
     const b=document.createElement("button");b.type="button";b.className="tab";b.setAttribute("role","tab");b.setAttribute("aria-selected",p===tab);b.style.setProperty("--c",PH[p].c);
     b.innerHTML="<b>"+PH[p].n+"</b><small>"+n+" of "+list.length+" done</small><span class='mini'><i style='width:"+(100*n/list.length)+"%'></i></span>";
     b.addEventListener("click",()=>{tab=p;render()});$("tabs").appendChild(b);
   });
   // rows
   const box=$("plan");box.innerHTML="";box.style.setProperty("--c",PH[tab].c);
-  const list=steps.filter(s=>s.ph===tab&&(!filter||st(o,s)===filter));
-  if(!list.length)box.innerHTML='<div class="empty">No step with this status in this phase.</div>';
+  const list=steps.filter(s=>s.ph===tab&&(!ess||s.ess));
+  if(!list.length)box.innerHTML='<div class="empty">No step here in this view.</div>';
   list.forEach(s=>{
     const cs=st(o,s),r=document.createElement("div");r.className="r"+(cs==="done"?" is-done":"")+(cur&&cur.i===s.i?" current":"");
     const rel=s.off===0?"Launch day":s.off<0?"D"+s.off:"D+"+s.off;
     const late=cs!=="done"&&s.date<today();if(late)r.classList.add("late");
     r.innerHTML='<div class="rh"><div class="rd"></div><button type="button" class="rt" aria-expanded="false"><span></span></button><select class="st" aria-label="Status"></select></div><div class="rx" hidden></div>';
     r.querySelector(".rd").innerHTML=s.date.toLocaleDateString("en-GB",{day:"numeric",month:"short"})+"<small>"+(late?"Overdue":rel)+"</small>";
-    r.querySelector(".rt span").textContent=s.title;if(s.adm){const t=document.createElement("em");t.className="tag";t.textContent="Admin";r.querySelector(".rt").appendChild(t)}r.querySelector(".rx").textContent=s.det;if(s.tip&&mode!=="mine"){const t=document.createElement("em");t.className="tag";t.textContent="Tip";r.querySelector(".rt").appendChild(t);const q=document.createElement("p");q.className="tip";const qb=document.createElement("b");qb.textContent="From experience. ";q.appendChild(qb);q.appendChild(document.createTextNode(s.tip));r.querySelector(".rx").appendChild(q)}
+    r.querySelector(".rt span").textContent=s.title;if(s.adm){const t=document.createElement("em");t.className="tag";t.textContent="Admin";r.querySelector(".rt").appendChild(t)}r.querySelector(".rx").textContent=s.det;if(s.tip&&mode!=="mine"){const t=document.createElement("em");t.className="tag";t.textContent="Tip";r.querySelector(".rt").appendChild(t);const q=document.createElement("p");q.className="tip";const qb=document.createElement("b");qb.textContent="Tip. ";q.appendChild(qb);q.appendChild(document.createTextNode(s.tip));r.querySelector(".rx").appendChild(q)}
     const bt=r.querySelector(".rt"),rx=r.querySelector(".rx");
     bt.addEventListener("click",()=>{rx.hidden=!rx.hidden;bt.setAttribute("aria-expanded",!rx.hidden)});
     const sel=r.querySelector("select");sel.dataset.s=cs;
@@ -425,14 +429,14 @@ function render(){
     const a=document.createElement("button");a.type="button";a.className="add";a.textContent="+ Add a step";
     a.addEventListener("click",()=>{
       const inTab=steps.filter(s=>s.ph===tab),d=new Date(inTab.length?inTab[inTab.length-1].date:launch);
-      const n={i:Math.max(0,...steps.map(s=>s.i))+1,title:"New step",det:"",ph:tab,date:d,off:Math.round((d-launch)/DAY),adm:false};
+      const n={i:Math.max(0,...steps.map(s=>s.i))+1,title:"New step",det:"",ph:tab,date:d,off:Math.round((d-launch)/DAY),adm:false,ess:true,tip:""};
       steps.push(n);steps.sort((a,b)=>a.date-b.date||a.i-b.i);persist();filter=null;render();
       const f=document.querySelector('input[data-id="'+n.i+'"]');if(f){f.focus();f.select()}
     });
     box.appendChild(a);
   }
   document.querySelectorAll("#mode [data-m]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===mode));
-  $("restore").hidden=mode!=="mine";
+  $("restore").hidden=mode!=="mine";$("ess").setAttribute("aria-pressed",ess);
   // stats and next action
   const total=steps.length,n=steps.filter(s=>st(o,s)==="done").length,diff=Math.round((launch-today())/DAY);
   $("days").textContent=Math.abs(diff);
@@ -443,9 +447,9 @@ function render(){
   const lateN=steps.filter(s=>st(o,s)!=="done"&&s.date<today()).length,al=$("alert");
   const sd=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
   const lateL=steps.filter(s=>st(o,s)!=="done"&&s.date<today()),soon=steps.filter(s=>st(o,s)!=="done"&&s.date>=today()&&(s.date-today())/DAY<=7);
-  al.hidden=!(lateL.length||soon.length);al.innerHTML="";
+  al.hidden=!touched||!(lateL.length||soon.length);al.innerHTML="";
   if(!al.hidden){
-    const h=document.createElement("b");h.textContent="🔔 Reminders: "+(lateL.length?lateL.length+" overdue":"")+(lateL.length&&soon.length?", ":"")+(soon.length?soon.length+" due within 7 days":"");al.appendChild(h);
+    const h=document.createElement("b");h.textContent="Reminders: "+(lateL.length?lateL.length+" overdue":"")+(lateL.length&&soon.length?", ":"")+(soon.length?soon.length+" due within 7 days":"");al.appendChild(h);
     if(lateL.length&&diff>0){const pp=document.createElement("p");pp.textContent="Your launch is in "+diff+" days, so some steps are behind the ideal schedule. Do the overdue ones first, in order.";al.appendChild(pp)}
     const ul=document.createElement("ul");
     [...lateL.map(s=>[s,1]),...soon.map(s=>[s,0])].slice(0,5).forEach(([s,l])=>{const li=document.createElement("li"),b=document.createElement("button");b.type="button";if(l)b.className="late";b.textContent=(l?"Overdue · ":"Due ")+sd(s.date)+" · "+s.title;b.addEventListener("click",()=>{tab=s.ph;filter=null;render();$("tabs").scrollIntoView({block:"start"})});li.appendChild(b);ul.appendChild(li)});
@@ -487,7 +491,7 @@ function xlsx(){
   const last=steps.length+3;
   const head=["Phase","Date","Day","Step","What to do","Status","Owner","Notes"].map((h,i)=>str("ABCDEFGH"[i]+"3",h,1)).join("");
   const rows=steps.map((s,i)=>{const r=i+4,rel=s.off===0?"Launch day":s.off<0?"D"+s.off:"D+"+s.off;
-    return '<row r="'+r+'">'+str("A"+r,PH[s.ph].n,3)+'<c r="B'+r+'" s="2"><v>'+serial(s.date)+"</v></c>"+str("C"+r,rel,3)+str("D"+r,s.title,5)+str("E"+r,s.det+(s.tip?" From experience: "+s.tip:""),3)+str("F"+r,LBL[st(o,s)],3)+'<c r="G'+r+'" s="3"/><c r="H'+r+'" s="3"/></row>'}).join("");
+    return '<row r="'+r+'">'+str("A"+r,PH[s.ph].n,3)+'<c r="B'+r+'" s="2"><v>'+serial(s.date)+"</v></c>"+str("C"+r,rel,3)+str("D"+r,s.title,5)+str("E"+r,s.det+(s.tip?" Tip: "+s.tip:""),3)+str("F"+r,LBL[st(o,s)],3)+'<c r="G'+r+'" s="3"/><c r="H'+r+'" s="3"/></row>'}).join("");
   const cf=[["Done",0],["Validated",1],["Ordered",2],["In progress",3]].map(([v,d],i)=>'<cfRule type="cellIs" dxfId="'+d+'" priority="'+(i+1)+'" operator="equal"><formula>"'+v+'"</formula></cfRule>').join("");
   const sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0" showGridLines="0"><pane ySplit="3" topLeftCell="A4" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>'
     +'<cols><col min="1" max="1" width="18" customWidth="1"/><col min="2" max="2" width="17" customWidth="1"/><col min="3" max="3" width="11" customWidth="1"/><col min="4" max="4" width="46" customWidth="1"/><col min="5" max="5" width="70" customWidth="1"/><col min="6" max="6" width="14" customWidth="1"/><col min="7" max="7" width="16" customWidth="1"/><col min="8" max="8" width="30" customWidth="1"/></cols>'
@@ -513,29 +517,31 @@ function download(blob,name){const a=document.createElement("a");a.href=URL.crea
 $("xlsx").addEventListener("click",()=>download(xlsx(),"launch-plan.xlsx"));
 const flash=(b,t)=>{const o=b.dataset.o||b.textContent;b.dataset.o=o;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
 document.querySelectorAll("#mode [data-m]").forEach(b=>b.addEventListener("click",()=>{
-  mode=b.dataset.m;try{localStorage.setItem(key()+":m",mode)}catch(e){}
+  mode=b.dataset.m;if(mode==="mine")touched=true;try{localStorage.setItem(key()+":m",mode)}catch(e){}
   const fresh=mode==="mine"&&!loadC();compute();if(fresh)persist();render();
 }));
+$("ess").addEventListener("click",()=>{ess=!ess;try{localStorage.setItem("lp-ess",ess?"1":"0")}catch(e){}render()});
 $("restore").addEventListener("click",()=>{try{localStorage.removeItem(key()+":c")}catch(e){}compute();persist();render()});
 $("f").addEventListener("submit",e=>{e.preventDefault();build()});
-$("f").addEventListener("input",e=>{$("hint").hidden=true;if(e.target.id==="name")render();else if($("date").value)build(true)});
+$("f").addEventListener("input",e=>{$("hint").hidden=true;touched=true;if(e.target.id==="name")render();else if($("date").value)build(true)});
 const link=()=>location.origin+location.pathname+"?d="+$("date").value+"&k="+val("kind")+"&a="+val("aud")+"&b="+val("bud")+"&f="+val("adm");
 $("share").addEventListener("click",e=>{
   const d={title:nm()||"Launch plan",text:"Our launch plan, launch date "+fmt(launch),url:link()};
   if(navigator.share)navigator.share(d).catch(()=>{});
   else(navigator.clipboard?navigator.clipboard.writeText(link()):Promise.reject()).then(()=>flash(e.target,"✓ Link copied"),()=>flash(e.target,"Copy failed"));
 });
-$("mail").addEventListener("click",()=>{
+function mailUrl(){
   const o=load(),up=steps.filter(s=>st(o,s)!=="done").slice(0,5);
   const body="Hello,\n\nHere is our launch plan. Launch date: "+fmt(launch)+".\n\nNext steps:\n"+up.map(s=>"- "+fmt(s.date)+": "+s.title+" ["+LBL[st(o,s)]+"]").join("\n")+"\n\nFull plan: "+link()+"\n";
-  location.href="mailto:?subject="+encodeURIComponent((nm()||"Launch plan")+": launch on "+fmt(launch))+"&body="+encodeURIComponent(body);
-});
+  return "mailto:?subject="+encodeURIComponent((nm()||"Launch plan")+": launch on "+fmt(launch))+"&body="+encodeURIComponent(body);
+}
+$("mail").addEventListener("click",()=>{location.href=mailUrl()});
 $("ics").addEventListener("click",ics);
 $("reset").addEventListener("click",()=>{save({});render()});
 const d=new Date();d.setDate(d.getDate()+60);$("date").value=d.toISOString().slice(0,10);
 const q=new URLSearchParams(location.search);
 if(/^\d{4}-\d\d-\d\d$/.test(q.get("d")||"")){
-  $("date").value=q.get("d");
+  $("date").value=q.get("d");touched=true;$("hint").hidden=true;
   [["kind","k"],["aud","a"],["bud","b"],["adm","f"]].forEach(([n,k])=>{const v=q.get(k)||"";if(/^[a-z0-9]+$/.test(v)){const el=document.querySelector('input[name="'+n+'"][value="'+v+'"]');if(el)el.checked=true}});
 }
 build(true);
