@@ -9,13 +9,13 @@
 <meta property="og:description" content="From launch date to a dated plan in 10 seconds.">
 <style>
 :root{
-  --bg:#F6F8F7;--card:#fff;--ink:#0B0F0E;--mute:#5F6B66;--line:#E3E8E5;
-  --p1:#0B0F0E;--gold:#10B981;--gold-soft:#6EE7B7;
-  --before:#475569;--launch:#059669;--after:#0284C7;
-  --shadow:0 1px 2px rgba(11,15,14,.05),0 12px 32px -14px rgba(11,15,14,.22);
-  --hero:#0B0F0E;
+  --bg:#FBF8F2;--card:#fff;--ink:#18223A;--mute:#5C6478;--line:#E9E2D3;
+  --p1:#14233F;--gold:#C9A45C;--gold-soft:#E3CC9A;
+  --before:#2B5C9E;--launch:#B07D1F;--after:#1F8A63;
+  --shadow:0 1px 2px rgba(20,35,63,.05),0 12px 32px -14px rgba(20,35,63,.2);
+  --hero:#0D182D;
 }
-@media (prefers-color-scheme:dark){:root{--bg:#0B0F0E;--card:#141A18;--ink:#F2F5F3;--mute:#9AA6A0;--line:#26302C;--p1:#6EE7B7;--before:#94A3B8;--launch:#34D399;--after:#38BDF8;--shadow:0 12px 32px -12px rgba(0,0,0,.6)}}
+@media (prefers-color-scheme:dark){:root{--bg:#0B1322;--card:#132038;--ink:#F5EFE3;--mute:#A3ABBD;--line:#24324F;--p1:#E3CC9A;--before:#7FA8E0;--launch:#E3CC9A;--after:#5FCFA0;--shadow:0 12px 32px -12px rgba(0,0,0,.6)}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
@@ -23,13 +23,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-ap
 
 /* hero */
 .hero{background:var(--hero);color:#fff;position:relative;overflow:hidden;padding:56px 0 120px}
-.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(16,185,129,.38),transparent);filter:blur(10px)}
-.hero:after{content:"";position:absolute;inset:auto auto -50% -15%;width:600px;height:600px;background:radial-gradient(closest-side,rgba(16,185,129,.16),transparent)}
+.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(201,164,92,.32),transparent);filter:blur(10px)}
+.hero:after{content:"";position:absolute;inset:auto auto -50% -15%;width:600px;height:600px;background:radial-gradient(closest-side,rgba(43,92,158,.55),transparent)}
 .hero .wrap{position:relative;z-index:1}
 .eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)}
 .eyebrow i{width:7px;height:7px;border-radius:50%;background:#3fd6a0;box-shadow:0 0 0 4px rgba(63,214,160,.25)}
 h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;letter-spacing:-.03em;margin:20px 0 14px;font-weight:800}
-h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(135deg,#6EE7B7,#10B981)}
+h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(135deg,#E3CC9A,#C9A45C)}
 .hero p{max-width:540px;margin:0;color:rgba(255,255,255,.75);font-size:1.1rem}
 
 /* form */
@@ -44,12 +44,12 @@ h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:
 .seg span{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;font-weight:600;font-size:.95rem;transition:.15s;background:var(--bg);height:100%}
 .seg small{font-weight:400;color:var(--mute);font-size:.8rem}
 .seg input:hover+span{border-color:var(--p1)}
-.seg input:focus-visible+span{outline:3px solid rgba(16,185,129,.6);outline-offset:2px}
+.seg input:focus-visible+span{outline:3px solid rgba(201,164,92,.7);outline-offset:2px}
 .seg input:checked+span{border-color:var(--p1);background:color-mix(in srgb,var(--gold) 16%,var(--card));box-shadow:inset 0 0 0 1px var(--p1)}
 input[type=date],input[type=text]{font:inherit;font-weight:600;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}
-input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(16,185,129,.6);border-color:var(--p1)}
-.cta{font:inherit;font-weight:700;font-size:1.05rem;color:#04130D;border:0;border-radius:14px;padding:16px 22px;background:#10B981;cursor:pointer;box-shadow:0 10px 24px -8px rgba(16,185,129,.5);transition:transform .15s,box-shadow .15s}
-.cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(16,185,129,.5)}
+input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,.7);border-color:var(--p1)}
+.cta{font:inherit;font-weight:700;font-size:1.05rem;color:#14233F;border:0;border-radius:14px;padding:16px 22px;background:linear-gradient(135deg,#E3CC9A,#C9A45C);cursor:pointer;box-shadow:0 10px 24px -8px rgba(201,164,92,.65);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(201,164,92,.65)}
 .cta:active{transform:none}
 
 /* results */
@@ -69,7 +69,7 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(16,185,129,
 .strip i.on{opacity:1}
 .legend{display:flex;justify-content:space-between;font-size:.78rem;color:var(--mute);font-weight:600}
 
-.next{margin-top:22px;border-radius:18px;padding:20px 22px;background:#0F1614;border:1px solid #26302C;border-left:5px solid var(--gold);color:#fff;box-shadow:0 18px 40px -16px rgba(16,185,129,.5)}
+.next{margin-top:22px;border-radius:18px;padding:20px 22px;background:linear-gradient(135deg,#14233F,#1F3A66);border-left:5px solid var(--gold);color:#fff;box-shadow:0 18px 40px -16px rgba(201,164,92,.65)}
 .next small{color:var(--gold-soft);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem}
 .next h3{margin:4px 0 4px;font-size:1.25rem}
 .next p{margin:0;opacity:.9;font-size:.95rem}
@@ -79,7 +79,20 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(16,185,129,
 .tools button.main{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .tools button:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--card))}
 
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
+.mode{display:flex;gap:6px;align-items:center;margin-top:24px;flex-wrap:wrap}
+.mode button[data-m]{font:inherit;font-weight:600;font-size:.9rem;padding:8px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.mode button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mode .link{font:inherit;font-size:.85rem;background:none;border:0;color:var(--mute);text-decoration:underline;cursor:pointer;margin-left:auto}
+.r.edit .rh{grid-template-columns:140px 1fr auto auto auto}
+.r.edit input,.r.edit textarea{font:inherit;font-size:.92rem;font-weight:500;padding:7px 9px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
+.r.edit textarea{resize:vertical;display:block}
+.r.edit .rx{padding-left:12px}
+.del{font:inherit;border:0;background:none;color:var(--mute);cursor:pointer;padding:6px 8px;border-radius:8px}
+.del:hover{color:#c8412b;background:color-mix(in srgb,#c8412b 10%,transparent)}
+.add{font:inherit;font-weight:600;width:100%;padding:12px;border:0;border-top:1px dashed var(--line);background:none;color:var(--ink);cursor:pointer}
+.add:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+@media(max-width:560px){.r.edit .rh{grid-template-columns:1fr auto auto auto}.r.edit .rh>input[type=date]{grid-column:1/-1}}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
 .tab{font:inherit;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s;display:grid;gap:6px}
 .tab b{font-size:.98rem}
 .tab small{color:var(--mute);font-size:.8rem}
@@ -104,12 +117,17 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(16,185,129,
 .r.is-done .rt span{text-decoration:line-through;color:var(--mute)}
 .rx{padding:0 12px 12px 96px;color:var(--mute);font-size:.9rem}
 .st{font:inherit;font-size:.8rem;font-weight:700;padding:6px 26px 6px 10px;border-radius:99px;border:0;cursor:pointer;color:var(--s);background:color-mix(in srgb,var(--s) 15%,var(--card)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23888' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 9px center;appearance:none}
-.st:focus-visible,.rt:focus-visible,.tab:focus-visible,.chip:focus-visible{outline:3px solid rgba(16,185,129,.6);outline-offset:2px}
+.st:focus-visible,.rt:focus-visible,.tab:focus-visible,.chip:focus-visible{outline:3px solid rgba(201,164,92,.7);outline-offset:2px}
 .empty{padding:22px;text-align:center;color:var(--mute);font-size:.92rem}
 [data-s=todo]{--s:#7b7a94}[data-s=doing]{--s:#2f7fe0}[data-s=ordered]{--s:#d98a00}[data-s=valid]{--s:#0E8F9E}[data-s=done]{--s:#12a574}
 @media(max-width:560px){.rh{grid-template-columns:1fr auto}.rd{grid-column:1/-1;display:flex;gap:8px}.rd small{display:inline}.rx{padding-left:12px}.tab small{display:none}}
 .ptitle{margin:0 0 14px;font-size:1.5rem;letter-spacing:-.02em}
 .alert{background:color-mix(in srgb,#d98a00 13%,var(--card));border:1px solid color-mix(in srgb,#d98a00 45%,var(--card));border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:.93rem}
+.alert b{display:block}.alert p{margin:4px 0 0}.alert small{color:var(--mute)}
+.alert ul{list-style:none;margin:8px 0 2px;padding:0;display:grid;gap:3px}
+.alert button{font:inherit;font-size:.9rem;background:none;border:0;padding:2px 0;color:var(--ink);cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--ink) 30%,transparent);text-underline-offset:3px}
+.alert button.late{color:#c8412b;font-weight:600}
+.tag{font-style:normal;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:99px;background:color-mix(in srgb,var(--gold) 26%,var(--card));color:var(--ink);white-space:nowrap}
 .tlbar{position:relative;height:66px;margin:30px 10px 0}
 .track{position:absolute;left:0;right:0;top:22px;height:8px;border-radius:99px;display:flex;gap:2px;overflow:hidden;opacity:.4}
 .track i{display:block}
@@ -173,6 +191,13 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
           <label><input type="radio" name="bud" value="paid"><span>Organic + paid<small>Ads included</small></span></label>
         </div>
       </fieldset>
+      <fieldset class="q full">
+        <legend>5. Quotes and invoices</legend>
+        <div class="seg">
+          <label><input type="radio" name="adm" value="adm" checked><span>Include reminders<small>Supplier quotes, orders, customer invoices</small></span></label>
+          <label><input type="radio" name="adm" value="noadm"><span>Marketing steps only</span></label>
+        </div>
+      </fieldset>
     </div>
     <button class="cta" type="submit">Build my launch plan →</button>
   </form>
@@ -196,11 +221,18 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
       <button type="button" id="xlsx" class="main">⬇ Download Excel</button>
       <button type="button" id="ics">📅 Add to calendar</button>
       <button type="button" id="copy">📋 Copy as text</button>
-      <button type="button" id="share">🔗 Copy share link</button>
+      <button type="button" id="share">👥 Share with team</button>
+      <button type="button" id="mail">✉ Send by email</button>
+      <button type="button" id="alerts">🔔 Turn on alerts</button>
       <button type="button" id="print">🖨 Print</button>
       <button type="button" id="reset">↺ Reset statuses</button>
     </div>
 
+    <div class="mode" id="mode" role="group" aria-label="Plan version">
+      <button type="button" data-m="sug">Suggested plan</button>
+      <button type="button" data-m="mine">✎ My version</button>
+      <button type="button" id="restore" class="link" hidden>Restore the suggested plan</button>
+    </div>
     <div class="tabs" id="tabs" role="tablist"></div>
     <div class="filters" id="filters"></div>
     <div class="table" id="plan"></div>
@@ -217,8 +249,10 @@ const S=[
  [-56,"Define who it is for and what changes for them","One sentence: for [who], who struggle with [problem], this is [what] that [benefit]. Everything else comes from this sentence.","b"],
  [-56,"Set one goal and one number","Pick the single result that proves the launch worked (sign-ups, sales, bookings) and a target for 30 days after.","b"],
  [-49,"Listen to 5 to 10 people in the target group","Short calls. Note the exact words they use for the problem, and reuse those words in your messages.","b"],
+ [-49,"Request quotes from suppliers","Design, video, print, agency, tools: ask for written quotes now, so prices and delays are known before you fix the offer.","b","adm"],
  [-42,"Write the core message and three proof points","Headline, one-paragraph story, three proofs (a number, a demo, a testimonial). Test it on two people.","b"],
  [-42,"Fix the offer: price, name, what is included","Decide before building assets. Changing the offer later breaks every asset.","b"],
+ [-42,"Approve quotes and place orders","Confirm each order in writing with its delivery date. Set the status to Ordered, then Validated once the work is delivered and approved.","b","adm"],
  [-35,"Build the landing page","One page, one action: the message, the proof, a single button and a tracking tag.","b"],
  [-35,"Set up tracking","Define the goal event, check that it fires, and name your campaigns so results can be read later.","b"],
  [-28,"Open a waiting list","Start collecting names now. Even a small list gives you a first audience on day one.","b"],
@@ -238,12 +272,16 @@ const S=[
  [1,"Answer everything and collect questions","Every question is content for the next post and a gap in the page.","l"],
  [2,"Share the first proof","First results, first feedback, a screenshot or a quote (with permission).","l"],
  [3,"Remind the waiting list","Those who did not act yet, with a different angle than the announcement.","l"],
+ [3,"Send quotes to the leads who asked","The same day if you can. A quote that arrives fast is much more likely to be signed.","l",["adm","b2b"]],
  [7,"First review against the goal","Look at the number you set. What worked, what did not, what to change this week.","a"],
  [7,"Fix the biggest drop-off","Find the step where most people leave (page, form, price) and fix only that.","a"],
+ [7,"Send invoices to the first customers","Invoice as soon as the sale is confirmed, with the payment terms you agreed.","a","adm"],
  [10,"Publish a story from the launch","What you learned, with real numbers you are free to share.","a"],
  [14,"Ask for feedback and testimonials","Ask the first customers two questions: what nearly stopped you, and what would you tell a friend.","a"],
  [14,"Adjust budget and channels","Keep what produces the goal, stop what only produces clicks.","a","paid"],
+ [14,"Check and pay supplier invoices","Compare each invoice with its approved quote before paying, then update the real cost of the launch.","a","adm"],
  [21,"Second wave of content","Use the best questions, objections and proof collected so far.","a"],
+ [21,"Follow up unpaid invoices and unanswered quotes","A short, polite reminder with the document attached again.","a","adm"],
  [30,"Final review and next steps","Result against the goal, three lessons, what to repeat, what to drop. Write it on one page.","a"]
 ];
 const PH={b:{n:"Before the launch",c:"var(--before)",i:"1"},l:{n:"Launch week",c:"var(--launch)",i:"2"},a:{n:"After the launch",c:"var(--after)",i:"3"}};
@@ -255,9 +293,13 @@ let steps=[],launch,tab="b",filter=null;
 const ST=[["todo","To do"],["doing","In progress"],["ordered","Ordered"],["valid","Validated"],["done","Done"]];
 const LBL=Object.fromEntries(ST);
 
-const key=()=>"lp3:"+$("date").value+":"+val("kind")+":"+val("aud")+":"+val("bud");
+const key=()=>"lp3:"+$("date").value+":"+val("kind")+":"+val("aud")+":"+val("bud")+":"+val("adm");
 const load=()=>{try{return JSON.parse(localStorage.getItem(key())||"{}")}catch(e){return{}}};
 const save=o=>{try{localStorage.setItem(key(),JSON.stringify(o))}catch(e){}};
+let mode="sug";
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const loadC=()=>{try{const c=JSON.parse(localStorage.getItem(key()+":c")||"null");return Array.isArray(c)&&c.length?c:null}catch(e){return null}};
+const persist=()=>{try{localStorage.setItem(key()+":c",JSON.stringify(steps.map(s=>({i:s.i,title:s.title,det:s.det,ph:s.ph,adm:!!s.adm,d:iso(s.date)}))))}catch(e){}};
 const st=(o,s)=>o["s"+s.i]||"todo";
 const today=()=>{const t=new Date();t.setHours(12,0,0,0);return t};
 
@@ -269,13 +311,19 @@ function wording(t){
 }
 function current(o){const u=steps.filter(s=>st(o,s)!=="done");return u[0]}
 const nm=()=>$("name").value.trim();
+function compute(){
+  const aud=val("aud"),bud=val("bud"),adm=val("adm");
+  steps=S.filter(s=>[].concat(s[4]||[]).every(c=>c===aud||c===bud||c===adm)).map((s,i)=>{
+    const d=new Date(launch);d.setDate(d.getDate()+s[0]);
+    return{i,off:s[0],title:wording(s[1]),det:s[2],ph:s[3],date:d,adm:[].concat(s[4]||[]).includes("adm")};
+  });
+  if(mode==="mine"){const c=loadC();if(c)steps=c.map(x=>{const d=new Date(x.d+"T12:00:00");return{i:x.i,title:String(x.title),det:String(x.det||""),ph:PH[x.ph]?x.ph:"b",adm:!!x.adm,date:d,off:Math.round((d-launch)/DAY)}})}
+  steps.sort((a,b)=>a.date-b.date||a.i-b.i);
+}
 function build(quiet){
   launch=new Date($("date").value+"T12:00:00");
-  const aud=val("aud"),bud=val("bud");
-  steps=S.filter(s=>!s[4]||s[4]===aud||s[4]===bud).map((s,i)=>{
-    const d=new Date(launch);d.setDate(d.getDate()+s[0]);
-    return{i,off:s[0],title:wording(s[1]),det:s[2],ph:s[3],date:d};
-  });
+  try{mode=localStorage.getItem(key()+":m")==="mine"?"mine":"sug"}catch(e){mode="sug"}
+  compute();
   const cur=current(load());tab=cur?cur.ph:"b";filter=null;
   $("out").hidden=false;render();
   if(!quiet)$("out").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});
@@ -307,14 +355,39 @@ function render(){
     const late=cs!=="done"&&s.date<today();if(late)r.classList.add("late");
     r.innerHTML='<div class="rh"><div class="rd"></div><button type="button" class="rt" aria-expanded="false"><span></span></button><select class="st" aria-label="Status"></select></div><div class="rx" hidden></div>';
     r.querySelector(".rd").innerHTML=s.date.toLocaleDateString("en-GB",{day:"numeric",month:"short"})+"<small>"+(late?"Overdue":rel)+"</small>";
-    r.querySelector(".rt span").textContent=s.title;r.querySelector(".rx").textContent=s.det;
+    r.querySelector(".rt span").textContent=s.title;if(s.adm){const t=document.createElement("em");t.className="tag";t.textContent="Admin";r.querySelector(".rt").appendChild(t)}r.querySelector(".rx").textContent=s.det;
     const bt=r.querySelector(".rt"),rx=r.querySelector(".rx");
     bt.addEventListener("click",()=>{rx.hidden=!rx.hidden;bt.setAttribute("aria-expanded",!rx.hidden)});
     const sel=r.querySelector("select");sel.dataset.s=cs;
     ST.forEach(([k,l])=>{const op=document.createElement("option");op.value=k;op.textContent=l;op.selected=k===cs;sel.appendChild(op)});
     sel.addEventListener("change",()=>{const x=load();x["s"+s.i]=sel.value;save(x);render()});
+    if(mode==="mine"){
+      r.classList.add("edit");const rh=r.querySelector(".rh");
+      const di=document.createElement("input");di.type="date";di.value=iso(s.date);di.setAttribute("aria-label","Date");
+      di.addEventListener("change",()=>{if(!di.value)return;s.date=new Date(di.value+"T12:00:00");s.off=Math.round((s.date-launch)/DAY);s.ph=s.off<0?"b":s.off<7?"l":"a";steps.sort((a,b)=>a.date-b.date||a.i-b.i);persist();tab=s.ph;render()});
+      r.querySelector(".rd").replaceWith(di);
+      const ti=document.createElement("input");ti.type="text";ti.value=s.title;ti.maxLength=120;ti.setAttribute("aria-label","Step");ti.dataset.id=s.i;
+      ti.addEventListener("change",()=>{s.title=ti.value.trim()||"Untitled step";ti.value=s.title;persist()});
+      rh.insertBefore(ti,bt);bt.querySelector("span").textContent="";bt.setAttribute("aria-label","Details");
+      const ta=document.createElement("textarea");ta.value=s.det;ta.rows=2;ta.placeholder="What to do, who does it, with what";ta.setAttribute("aria-label","Details");
+      ta.addEventListener("change",()=>{s.det=ta.value.trim();persist()});rx.textContent="";rx.appendChild(ta);
+      const del=document.createElement("button");del.type="button";del.className="del";del.textContent="\u2715";del.setAttribute("aria-label","Delete step");del.title="Delete this step";
+      del.addEventListener("click",()=>{if(steps.length<2)return;steps=steps.filter(x=>x!==s);persist();render()});rh.appendChild(del);
+    }
     box.appendChild(r);
   });
+  if(mode==="mine"){
+    const a=document.createElement("button");a.type="button";a.className="add";a.textContent="+ Add a step";
+    a.addEventListener("click",()=>{
+      const inTab=steps.filter(s=>s.ph===tab),d=new Date(inTab.length?inTab[inTab.length-1].date:launch);
+      const n={i:Math.max(0,...steps.map(s=>s.i))+1,title:"New step",det:"",ph:tab,date:d,off:Math.round((d-launch)/DAY),adm:false};
+      steps.push(n);steps.sort((a,b)=>a.date-b.date||a.i-b.i);persist();filter=null;render();
+      const f=document.querySelector('input[data-id="'+n.i+'"]');if(f){f.focus();f.select()}
+    });
+    box.appendChild(a);
+  }
+  document.querySelectorAll("#mode [data-m]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===mode));
+  $("restore").hidden=mode!=="mine";
   // stats and next action
   const total=steps.length,n=steps.filter(s=>st(o,s)==="done").length,diff=Math.round((launch-today())/DAY);
   $("days").textContent=Math.abs(diff);
@@ -323,8 +396,18 @@ function render(){
   $("fg").style.strokeDashoffset=188.5*(1-n/total);
   $("ptitle").textContent=nm()?"Launch plan: "+nm():"Your launch plan";
   const lateN=steps.filter(s=>st(o,s)!=="done"&&s.date<today()).length,al=$("alert");
-  al.hidden=!lateN;
-  if(lateN)al.textContent=diff>0?"Your launch is in "+diff+" days, so "+lateN+(lateN===1?" step is":" steps are")+" already behind the ideal schedule. Do those first, in order: they are marked Overdue.":lateN+(lateN===1?" step is":" steps are")+" overdue. They are marked in the plan.";
+  const sd=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+  const lateL=steps.filter(s=>st(o,s)!=="done"&&s.date<today()),soon=steps.filter(s=>st(o,s)!=="done"&&s.date>=today()&&(s.date-today())/DAY<=7);
+  al.hidden=!(lateL.length||soon.length);al.innerHTML="";
+  if(!al.hidden){
+    const h=document.createElement("b");h.textContent="🔔 Reminders: "+(lateL.length?lateL.length+" overdue":"")+(lateL.length&&soon.length?", ":"")+(soon.length?soon.length+" due within 7 days":"");al.appendChild(h);
+    if(lateL.length&&diff>0){const pp=document.createElement("p");pp.textContent="Your launch is in "+diff+" days, so some steps are behind the ideal schedule. Do the overdue ones first, in order.";al.appendChild(pp)}
+    const ul=document.createElement("ul");
+    [...lateL.map(s=>[s,1]),...soon.map(s=>[s,0])].slice(0,5).forEach(([s,l])=>{const li=document.createElement("li"),b=document.createElement("button");b.type="button";if(l)b.className="late";b.textContent=(l?"Overdue · ":"Due ")+sd(s.date)+" · "+s.title;b.addEventListener("click",()=>{tab=s.ph;filter=null;render();$("tabs").scrollIntoView({block:"start"})});li.appendChild(b);ul.appendChild(li)});
+    al.appendChild(ul);
+    const more=lateL.length+soon.length-5;if(more>0){const m=document.createElement("small");m.textContent="and "+more+" more in the plan";al.appendChild(m)}
+  }
+  notify(lateL.length,soon.length);
   const pos=x=>Math.max(0,Math.min(100,(x+56)/86*100)),td=-diff,sh=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
   $("tlbar").innerHTML='<div class="track"><i style="flex:56;background:'+PH.b.c+'"></i><i style="flex:7;background:'+PH.l.c+'"></i><i style="flex:23;background:'+PH.a.c+'"></i></div>'
     +steps.map(s=>'<span class="dot" data-s="'+st(o,s)+'" style="left:'+pos(s.off)+'%" title="'+s.title.replace(/"/g,"&quot;")+'"></span>').join("")
@@ -342,7 +425,7 @@ function ics(){
   const pad=n=>String(n).padStart(2,"0"),ds=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
   const esc=t=>t.replace(/[\\,;]/g,m=>"\\"+m).replace(/\n/g,"\\n");
   const ev=steps.map(s=>{const e=new Date(s.date);e.setDate(e.getDate()+1);
-    return["BEGIN:VEVENT","UID:lp-"+ds(launch)+"-"+s.i+"@launch-planner","DTSTAMP:"+ds(new Date())+"T000000Z","DTSTART;VALUE=DATE:"+ds(s.date),"DTEND;VALUE=DATE:"+ds(e),"SUMMARY:"+esc((nm()||"Launch")+": "+s.title),"DESCRIPTION:"+esc(s.det),"END:VEVENT"].join("\r\n")});
+    return["BEGIN:VEVENT","UID:lp-"+ds(launch)+"-"+s.i+"@launch-planner","DTSTAMP:"+ds(new Date())+"T000000Z","DTSTART;VALUE=DATE:"+ds(s.date),"DTEND;VALUE=DATE:"+ds(e),"SUMMARY:"+esc((nm()||"Launch")+": "+s.title),"DESCRIPTION:"+esc(s.det),"BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc("Tomorrow: "+s.title),"TRIGGER:-PT15H","END:VALARM","BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc("Today: "+s.title),"TRIGGER:PT9H","END:VALARM","END:VEVENT"].join("\r\n")});
   const blob=new Blob(["BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Launch Planner//EN\r\n"+ev.join("\r\n")+"\r\nEND:VCALENDAR\r\n"],{type:"text/calendar"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="launch-plan.ics";document.body.appendChild(a);a.click();a.remove();
 }
@@ -379,7 +462,7 @@ function xlsx(){
   const dx=(bg,fg)=>'<dxf><font><b/><color rgb="FF'+fg+'"/></font><fill><patternFill><bgColor rgb="FF'+bg+'"/></patternFill></fill></dxf>';
   const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="ddd d mmm yyyy"/></numFmts>'
     +'<fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font><font><b/><sz val="15"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>'
-    +'<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B0F0E"/></patternFill></fill></fills>'
+    +'<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1F2937"/></patternFill></fill></fills>'
     +'<borders count="2"><border/><border><bottom style="thin"><color rgb="FFE5E7EB"/></bottom></border></borders><cellStyleXfs count="1"><xf/></cellStyleXfs>'
     +'<cellXfs count="6"><xf/><xf fontId="1" fillId="2" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="164" borderId="1" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment horizontal="left" vertical="top"/></xf><xf borderId="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf><xf fontId="2" applyFont="1"/><xf fontId="3" borderId="1" applyFont="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf></cellXfs>'
     +'<dxfs count="4">'+dx("D1FAE5","065F46")+dx("CFFAFE","155E75")+dx("FEF3C7","92400E")+dx("DBEAFE","1E40AF")+"</dxfs></styleSheet>";
@@ -394,9 +477,35 @@ function xlsx(){
 function download(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove()}
 $("xlsx").addEventListener("click",()=>download(xlsx(),"launch-plan.xlsx"));
 const flash=(b,t)=>{const o=b.dataset.o||b.textContent;b.dataset.o=o;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
+document.querySelectorAll("#mode [data-m]").forEach(b=>b.addEventListener("click",()=>{
+  mode=b.dataset.m;try{localStorage.setItem(key()+":m",mode)}catch(e){}
+  const fresh=mode==="mine"&&!loadC();compute();if(fresh)persist();render();
+}));
+$("restore").addEventListener("click",()=>{try{localStorage.removeItem(key()+":c")}catch(e){}compute();persist();render()});
 $("f").addEventListener("submit",e=>{e.preventDefault();build()});
 $("copy").addEventListener("click",e=>{(navigator.clipboard?navigator.clipboard.writeText(text()):Promise.reject()).then(()=>flash(e.target,"✓ Copied"),()=>flash(e.target,"Copy failed"))});
-$("share").addEventListener("click",e=>{const u=location.origin+location.pathname+"?d="+$("date").value+"&k="+val("kind")+"&a="+val("aud")+"&b="+val("bud");(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>flash(e.target,"✓ Link copied"),()=>flash(e.target,"Copy failed"))});
+const link=()=>location.origin+location.pathname+"?d="+$("date").value+"&k="+val("kind")+"&a="+val("aud")+"&b="+val("bud")+"&f="+val("adm");
+$("share").addEventListener("click",e=>{
+  const d={title:nm()||"Launch plan",text:"Our launch plan, launch date "+fmt(launch),url:link()};
+  if(navigator.share)navigator.share(d).catch(()=>{});
+  else(navigator.clipboard?navigator.clipboard.writeText(link()):Promise.reject()).then(()=>flash(e.target,"✓ Link copied"),()=>flash(e.target,"Copy failed"));
+});
+$("mail").addEventListener("click",()=>{
+  const o=load(),up=steps.filter(s=>st(o,s)!=="done").slice(0,5);
+  const body="Hello,\n\nHere is our launch plan. Launch date: "+fmt(launch)+".\n\nNext steps:\n"+up.map(s=>"- "+fmt(s.date)+": "+s.title+" ["+LBL[st(o,s)]+"]").join("\n")+"\n\nFull plan: "+link()+"\n";
+  location.href="mailto:?subject="+encodeURIComponent((nm()||"Launch plan")+": launch on "+fmt(launch))+"&body="+encodeURIComponent(body);
+});
+function notify(l,n){try{
+  if(!("Notification"in window)||Notification.permission!=="granted"||localStorage.getItem("lp-alerts")!=="1"||!(l||n))return;
+  const k="lp-alerted:"+key(),d=new Date().toDateString();if(localStorage.getItem(k)===d)return;localStorage.setItem(k,d);
+  new Notification((nm()||"Launch plan")+": "+(l?l+" overdue":"")+(l&&n?", ":"")+(n?n+" due this week":""),{body:"Open your launch plan to see what to do next."});
+}catch(e){}}
+$("alerts").addEventListener("click",async e=>{
+  if(!("Notification"in window))return flash(e.target,"Not supported here");
+  const p=await Notification.requestPermission();
+  if(p==="granted"){try{localStorage.setItem("lp-alerts","1");localStorage.removeItem("lp-alerted:"+key())}catch(x){}flash(e.target,"✓ Alerts on");render()}
+  else flash(e.target,"Blocked by browser");
+});
 $("print").addEventListener("click",()=>window.print());
 $("ics").addEventListener("click",ics);
 $("reset").addEventListener("click",()=>{save({});render()});
@@ -404,7 +513,7 @@ const d=new Date();d.setDate(d.getDate()+60);$("date").value=d.toISOString().sli
 const q=new URLSearchParams(location.search);
 if(/^\d{4}-\d\d-\d\d$/.test(q.get("d")||"")){
   $("date").value=q.get("d");
-  [["kind","k"],["aud","a"],["bud","b"]].forEach(([n,k])=>{const v=q.get(k)||"";if(/^[a-z0-9]+$/.test(v)){const el=document.querySelector('input[name="'+n+'"][value="'+v+'"]');if(el)el.checked=true}});
+  [["kind","k"],["aud","a"],["bud","b"],["adm","f"]].forEach(([n,k])=>{const v=q.get(k)||"";if(/^[a-z0-9]+$/.test(v)){const el=document.querySelector('input[name="'+n+'"][value="'+v+'"]');if(el)el.checked=true}});
   build(true);
 }
 </script>
