@@ -76,6 +76,7 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,
 
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 4px}
 .tools button{font:inherit;font-weight:600;font-size:.9rem;padding:9px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s}
+.tools button.main{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .tools button:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--card))}
 
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
@@ -192,6 +193,7 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
     <div class="next" id="next"></div>
 
     <div class="tools">
+      <button type="button" id="xlsx" class="main">⬇ Download Excel</button>
       <button type="button" id="ics">📅 Add to calendar</button>
       <button type="button" id="copy">📋 Copy as text</button>
       <button type="button" id="share">🔗 Copy share link</button>
@@ -344,6 +346,53 @@ function ics(){
   const blob=new Blob(["BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Launch Planner//EN\r\n"+ev.join("\r\n")+"\r\nEND:VCALENDAR\r\n"],{type:"text/calendar"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="launch-plan.ics";document.body.appendChild(a);a.click();a.remove();
 }
+// ---- Excel export: a real .xlsx built in the browser, no library ----
+const X=t=>String(t).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
+function zip(files){
+  const T=new Uint32Array(256).map((_,n)=>{for(let k=0;k<8;k++)n=n&1?0xEDB88320^(n>>>1):n>>>1;return n>>>0});
+  const crc=b=>{let c=-1;for(let i=0;i<b.length;i++)c=T[(c^b[i])&255]^(c>>>8);return(c^-1)>>>0};
+  const enc=new TextEncoder(),parts=[],cen=[];let off=0;
+  const u16=n=>[n&255,n>>>8&255],u32=n=>[n&255,n>>>8&255,n>>>16&255,n>>>24&255];
+  files.forEach(([name,body])=>{
+    const nb=enc.encode(name),db=enc.encode(body),c=crc(db);
+    const head=[...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0x21),...u32(c),...u32(db.length),...u32(db.length),...u16(nb.length),...u16(0)];
+    parts.push(new Uint8Array([0x50,0x4b,3,4,...head]),nb,db);
+    cen.push(new Uint8Array([0x50,0x4b,1,2,...u16(20),...head,...u16(0),...u16(0),...u16(0),...u32(0),...u32(off)]),nb);
+    off+=30+nb.length+db.length;
+  });
+  const cl=cen.reduce((a,b)=>a+b.length,0);
+  return new Blob([...parts,...cen,new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u16(files.length),...u16(files.length),...u32(cl),...u32(off),0,0])],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+function xlsx(){
+  const o=load(),serial=d=>Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(1899,11,30))/DAY);
+  const str=(ref,t,st)=>'<c r="'+ref+'" t="inlineStr"'+(st?' s="'+st+'"':"")+'><is><t xml:space="preserve">'+X(t)+"</t></is></c>";
+  const last=steps.length+3;
+  const head=["Phase","Date","Day","Step","What to do","Status","Owner","Notes"].map((h,i)=>str("ABCDEFGH"[i]+"3",h,1)).join("");
+  const rows=steps.map((s,i)=>{const r=i+4,rel=s.off===0?"Launch day":s.off<0?"D"+s.off:"D+"+s.off;
+    return '<row r="'+r+'">'+str("A"+r,PH[s.ph].n,3)+'<c r="B'+r+'" s="2"><v>'+serial(s.date)+"</v></c>"+str("C"+r,rel,3)+str("D"+r,s.title,5)+str("E"+r,s.det,3)+str("F"+r,LBL[st(o,s)],3)+'<c r="G'+r+'" s="3"/><c r="H'+r+'" s="3"/></row>'}).join("");
+  const cf=[["Done",0],["Validated",1],["Ordered",2],["In progress",3]].map(([v,d],i)=>'<cfRule type="cellIs" dxfId="'+d+'" priority="'+(i+1)+'" operator="equal"><formula>"'+v+'"</formula></cfRule>').join("");
+  const sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0" showGridLines="0"><pane ySplit="3" topLeftCell="A4" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>'
+    +'<cols><col min="1" max="1" width="18" customWidth="1"/><col min="2" max="2" width="17" customWidth="1"/><col min="3" max="3" width="11" customWidth="1"/><col min="4" max="4" width="46" customWidth="1"/><col min="5" max="5" width="70" customWidth="1"/><col min="6" max="6" width="14" customWidth="1"/><col min="7" max="7" width="16" customWidth="1"/><col min="8" max="8" width="30" customWidth="1"/></cols>'
+    +'<sheetData><row r="1" ht="24" customHeight="1">'+str("A1",(nm()?nm()+": launch plan":"Launch plan")+" (launch date "+fmt(launch)+")",4)+'</row><row r="3" ht="22" customHeight="1">'+head+"</row>"+rows+"</sheetData>"
+    +'<autoFilter ref="A3:H'+last+'"/><conditionalFormatting sqref="F4:F'+last+'">'+cf+"</conditionalFormatting>"
+    +'<dataValidations count="1"><dataValidation type="list" allowBlank="1" showErrorMessage="1" sqref="F4:F'+last+'"><formula1>"To do,In progress,Ordered,Validated,Done"</formula1></dataValidation></dataValidations></worksheet>';
+  const dx=(bg,fg)=>'<dxf><font><b/><color rgb="FF'+fg+'"/></font><fill><patternFill><bgColor rgb="FF'+bg+'"/></patternFill></fill></dxf>';
+  const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="ddd d mmm yyyy"/></numFmts>'
+    +'<fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font><font><b/><sz val="15"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>'
+    +'<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1F2937"/></patternFill></fill></fills>'
+    +'<borders count="2"><border/><border><bottom style="thin"><color rgb="FFE5E7EB"/></bottom></border></borders><cellStyleXfs count="1"><xf/></cellStyleXfs>'
+    +'<cellXfs count="6"><xf/><xf fontId="1" fillId="2" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="164" borderId="1" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment horizontal="left" vertical="top"/></xf><xf borderId="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf><xf fontId="2" applyFont="1"/><xf fontId="3" borderId="1" applyFont="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf></cellXfs>'
+    +'<dxfs count="4">'+dx("D1FAE5","065F46")+dx("CFFAFE","155E75")+dx("FEF3C7","92400E")+dx("DBEAFE","1E40AF")+"</dxfs></styleSheet>";
+  const b=zip([
+    ["[Content_Types].xml",'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'],
+    ["_rels/.rels",'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+    ["xl/workbook.xml",'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Launch plan" sheetId="1" r:id="rId1"/></sheets></workbook>'],
+    ["xl/_rels/workbook.xml.rels",'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+    ["xl/styles.xml",styles],["xl/worksheets/sheet1.xml",sheet]]);
+  return b;
+}
+function download(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove()}
+$("xlsx").addEventListener("click",()=>download(xlsx(),"launch-plan.xlsx"));
 const flash=(b,t)=>{const o=b.dataset.o||b.textContent;b.dataset.o=o;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
 $("f").addEventListener("submit",e=>{e.preventDefault();build()});
 $("copy").addEventListener("click",e=>{(navigator.clipboard?navigator.clipboard.writeText(text()):Promise.reject()).then(()=>flash(e.target,"✓ Copied"),()=>flash(e.target,"Copy failed"))});
