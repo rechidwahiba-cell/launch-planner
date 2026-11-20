@@ -9,13 +9,13 @@
 <meta property="og:description" content="From launch date to a dated plan in 10 seconds.">
 <style>
 :root{
-  --bg:#f6f5fb;--card:#fff;--ink:#14122b;--mute:#6b6a85;--line:#e7e5f2;
-  --p1:#5b3df5;--p2:#e0439a;--grad:linear-gradient(135deg,#5b3df5 0%,#9b3df5 50%,#e0439a 100%);
-  --before:#5b3df5;--launch:#f2701d;--after:#12a574;
-  --shadow:0 1px 2px rgba(20,18,43,.06),0 12px 32px -12px rgba(20,18,43,.18);
-  --hero:#14122b;
+  --bg:#FBF8F2;--card:#fff;--ink:#18223A;--mute:#5C6478;--line:#E9E2D3;
+  --p1:#14233F;--gold:#C9A45C;--gold-soft:#E3CC9A;
+  --before:#2B5C9E;--launch:#B07D1F;--after:#1F8A63;
+  --shadow:0 1px 2px rgba(20,35,63,.05),0 12px 32px -14px rgba(20,35,63,.2);
+  --hero:#0D182D;
 }
-@media (prefers-color-scheme:dark){:root{--bg:#0f0e1c;--card:#191830;--ink:#f1f0ff;--mute:#a09fc0;--line:#2a2947;--before:#8f7bff;--launch:#ff9150;--after:#3fd6a0;--shadow:0 12px 32px -12px rgba(0,0,0,.6);--hero:#0a0918}}
+@media (prefers-color-scheme:dark){:root{--bg:#0B1322;--card:#132038;--ink:#F5EFE3;--mute:#A3ABBD;--line:#24324F;--p1:#E3CC9A;--before:#7FA8E0;--launch:#E3CC9A;--after:#5FCFA0;--shadow:0 12px 32px -12px rgba(0,0,0,.6)}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
@@ -23,13 +23,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-ap
 
 /* hero */
 .hero{background:var(--hero);color:#fff;position:relative;overflow:hidden;padding:56px 0 120px}
-.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(224,67,154,.55),transparent);filter:blur(10px)}
-.hero:after{content:"";position:absolute;inset:auto auto -50% -15%;width:600px;height:600px;background:radial-gradient(closest-side,rgba(91,61,245,.6),transparent)}
+.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(201,164,92,.32),transparent);filter:blur(10px)}
+.hero:after{content:"";position:absolute;inset:auto auto -50% -15%;width:600px;height:600px;background:radial-gradient(closest-side,rgba(43,92,158,.55),transparent)}
 .hero .wrap{position:relative;z-index:1}
 .eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)}
 .eyebrow i{width:7px;height:7px;border-radius:50%;background:#3fd6a0;box-shadow:0 0 0 4px rgba(63,214,160,.25)}
 h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;letter-spacing:-.03em;margin:20px 0 14px;font-weight:800}
-h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(135deg,#a99bff,#ff7fc0)}
+h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(135deg,#E3CC9A,#C9A45C)}
 .hero p{max-width:540px;margin:0;color:rgba(255,255,255,.75);font-size:1.1rem}
 
 /* form */
@@ -44,12 +44,12 @@ h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;back
 .seg span{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;font-weight:600;font-size:.95rem;transition:.15s;background:var(--bg);height:100%}
 .seg small{font-weight:400;color:var(--mute);font-size:.8rem}
 .seg input:hover+span{border-color:var(--p1)}
-.seg input:focus-visible+span{outline:3px solid rgba(91,61,245,.4);outline-offset:2px}
-.seg input:checked+span{border-color:var(--p1);background:rgba(91,61,245,.09);box-shadow:inset 0 0 0 1px var(--p1)}
-input[type=date]{font:inherit;font-weight:600;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}
-input[type=date]:focus{outline:3px solid rgba(91,61,245,.4);border-color:var(--p1)}
-.cta{font:inherit;font-weight:700;font-size:1.05rem;color:#fff;border:0;border-radius:14px;padding:16px 22px;background:var(--grad);cursor:pointer;box-shadow:0 10px 24px -8px rgba(155,61,245,.7);transition:transform .15s,box-shadow .15s}
-.cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(155,61,245,.8)}
+.seg input:focus-visible+span{outline:3px solid rgba(201,164,92,.7);outline-offset:2px}
+.seg input:checked+span{border-color:var(--p1);background:color-mix(in srgb,var(--gold) 16%,var(--card));box-shadow:inset 0 0 0 1px var(--p1)}
+input[type=date],input[type=text]{font:inherit;font-weight:600;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}
+input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,.7);border-color:var(--p1)}
+.cta{font:inherit;font-weight:700;font-size:1.05rem;color:#14233F;border:0;border-radius:14px;padding:16px 22px;background:linear-gradient(135deg,#E3CC9A,#C9A45C);cursor:pointer;box-shadow:0 10px 24px -8px rgba(201,164,92,.65);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(201,164,92,.65)}
 .cta:active{transform:none}
 
 /* results */
@@ -69,14 +69,14 @@ input[type=date]:focus{outline:3px solid rgba(91,61,245,.4);border-color:var(--p
 .strip i.on{opacity:1}
 .legend{display:flex;justify-content:space-between;font-size:.78rem;color:var(--mute);font-weight:600}
 
-.next{margin-top:22px;border-radius:18px;padding:20px 22px;background:var(--grad);color:#fff;box-shadow:0 18px 40px -16px rgba(155,61,245,.7)}
-.next small{opacity:.85;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem}
+.next{margin-top:22px;border-radius:18px;padding:20px 22px;background:linear-gradient(135deg,#14233F,#1F3A66);border-left:5px solid var(--gold);color:#fff;box-shadow:0 18px 40px -16px rgba(201,164,92,.65)}
+.next small{color:var(--gold-soft);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem}
 .next h3{margin:4px 0 4px;font-size:1.25rem}
 .next p{margin:0;opacity:.9;font-size:.95rem}
 
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 4px}
 .tools button{font:inherit;font-weight:600;font-size:.9rem;padding:9px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s}
-.tools button:hover{border-color:var(--p1);color:var(--p1)}
+.tools button:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--card))}
 
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
 .tab{font:inherit;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s;display:grid;gap:6px}
@@ -103,10 +103,21 @@ input[type=date]:focus{outline:3px solid rgba(91,61,245,.4);border-color:var(--p
 .r.is-done .rt span{text-decoration:line-through;color:var(--mute)}
 .rx{padding:0 12px 12px 96px;color:var(--mute);font-size:.9rem}
 .st{font:inherit;font-size:.8rem;font-weight:700;padding:6px 26px 6px 10px;border-radius:99px;border:0;cursor:pointer;color:var(--s);background:color-mix(in srgb,var(--s) 15%,var(--card)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23888' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 9px center;appearance:none}
-.st:focus-visible,.rt:focus-visible,.tab:focus-visible,.chip:focus-visible{outline:3px solid rgba(91,61,245,.4);outline-offset:2px}
+.st:focus-visible,.rt:focus-visible,.tab:focus-visible,.chip:focus-visible{outline:3px solid rgba(201,164,92,.7);outline-offset:2px}
 .empty{padding:22px;text-align:center;color:var(--mute);font-size:.92rem}
-[data-s=todo]{--s:#7b7a94}[data-s=doing]{--s:#2f7fe0}[data-s=ordered]{--s:#d98a00}[data-s=valid]{--s:#8a4df5}[data-s=done]{--s:#12a574}
+[data-s=todo]{--s:#7b7a94}[data-s=doing]{--s:#2f7fe0}[data-s=ordered]{--s:#d98a00}[data-s=valid]{--s:#0E8F9E}[data-s=done]{--s:#12a574}
 @media(max-width:560px){.rh{grid-template-columns:1fr auto}.rd{grid-column:1/-1;display:flex;gap:8px}.rd small{display:inline}.rx{padding-left:12px}.tab small{display:none}}
+.ptitle{margin:0 0 14px;font-size:1.5rem;letter-spacing:-.02em}
+.alert{background:color-mix(in srgb,#d98a00 13%,var(--card));border:1px solid color-mix(in srgb,#d98a00 45%,var(--card));border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:.93rem}
+.tlbar{position:relative;height:66px;margin:30px 10px 0}
+.track{position:absolute;left:0;right:0;top:22px;height:8px;border-radius:99px;display:flex;gap:2px;overflow:hidden;opacity:.4}
+.track i{display:block}
+.dot{position:absolute;top:18px;width:16px;height:16px;border-radius:50%;background:var(--s);border:3px solid var(--bg);transform:translateX(-50%)}
+.today{position:absolute;top:6px;height:36px;width:2px;background:var(--ink);transform:translateX(-50%)}
+.today b{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.tll{position:absolute;left:0;right:0;top:46px;display:flex;justify-content:space-between;font-size:.76rem;color:var(--mute);font-weight:600}
+.tll .lz{position:absolute;transform:translateX(-50%);color:var(--launch);white-space:nowrap}
+.r.late .rd small{color:#c8412b;font-weight:700}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 
@@ -128,9 +139,13 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
 <main class="wrap">
   <form class="form" id="f">
     <div class="row">
-      <div class="q full">
+      <div class="q">
         <label class="lab" for="date">1. Launch date</label>
         <input type="date" id="date" required>
+      </div>
+      <div class="q">
+        <label class="lab" for="name">Launch name (optional)</label>
+        <input type="text" id="name" maxlength="60" placeholder="Spring collection, new app...">
       </div>
 
       <fieldset class="q full">
@@ -162,6 +177,8 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
   </form>
 
   <section id="out" hidden aria-live="polite">
+    <h2 class="ptitle" id="ptitle"></h2>
+    <div class="alert" id="alert" hidden></div>
     <div class="stats">
       <div class="stat"><div><b id="days">0</b><span id="dayslabel">days to launch</span></div></div>
       <div class="stat"><div><b id="total">0</b><span>steps in your plan</span></div></div>
@@ -171,11 +188,13 @@ footer a{color:var(--p1);font-weight:600;text-decoration:none}
       </div>
     </div>
 
+    <div class="tlbar" id="tlbar" aria-hidden="true"></div>
     <div class="next" id="next"></div>
 
     <div class="tools">
       <button type="button" id="ics">📅 Add to calendar</button>
       <button type="button" id="copy">📋 Copy as text</button>
+      <button type="button" id="share">🔗 Copy share link</button>
       <button type="button" id="print">🖨 Print</button>
       <button type="button" id="reset">↺ Reset statuses</button>
     </div>
@@ -246,8 +265,9 @@ function wording(t){
   if(k==="service")return t.replace("landing page","offer page");
   return t;
 }
-function current(o){const u=steps.filter(s=>st(o,s)!=="done");return u.find(s=>s.date>=today())||u[0]}
-function build(){
+function current(o){const u=steps.filter(s=>st(o,s)!=="done");return u[0]}
+const nm=()=>$("name").value.trim();
+function build(quiet){
   launch=new Date($("date").value+"T12:00:00");
   const aud=val("aud"),bud=val("bud");
   steps=S.filter(s=>!s[4]||s[4]===aud||s[4]===bud).map((s,i)=>{
@@ -256,7 +276,7 @@ function build(){
   });
   const cur=current(load());tab=cur?cur.ph:"b";filter=null;
   $("out").hidden=false;render();
-  $("out").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});
+  if(!quiet)$("out").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});
 }
 function render(){
   const o=load(),cur=current(o);
@@ -282,8 +302,9 @@ function render(){
   list.forEach(s=>{
     const cs=st(o,s),r=document.createElement("div");r.className="r"+(cs==="done"?" is-done":"")+(cur&&cur.i===s.i?" current":"");
     const rel=s.off===0?"Launch day":s.off<0?"D"+s.off:"D+"+s.off;
+    const late=cs!=="done"&&s.date<today();if(late)r.classList.add("late");
     r.innerHTML='<div class="rh"><div class="rd"></div><button type="button" class="rt" aria-expanded="false"><span></span></button><select class="st" aria-label="Status"></select></div><div class="rx" hidden></div>';
-    r.querySelector(".rd").innerHTML=s.date.toLocaleDateString("en-GB",{day:"numeric",month:"short"})+"<small>"+rel+"</small>";
+    r.querySelector(".rd").innerHTML=s.date.toLocaleDateString("en-GB",{day:"numeric",month:"short"})+"<small>"+(late?"Overdue":rel)+"</small>";
     r.querySelector(".rt span").textContent=s.title;r.querySelector(".rx").textContent=s.det;
     const bt=r.querySelector(".rt"),rx=r.querySelector(".rx");
     bt.addEventListener("click",()=>{rx.hidden=!rx.hidden;bt.setAttribute("aria-expanded",!rx.hidden)});
@@ -298,6 +319,15 @@ function render(){
   $("dayslabel").textContent=diff>0?(diff===1?"day to launch":"days to launch"):diff===0?"it is launch day":(Math.abs(diff)===1?"day since launch":"days since launch");
   $("total").textContent=total;$("done").textContent=n+" / "+total;$("pct").textContent=Math.round(100*n/total)+"%";
   $("fg").style.strokeDashoffset=188.5*(1-n/total);
+  $("ptitle").textContent=nm()?"Launch plan: "+nm():"Your launch plan";
+  const lateN=steps.filter(s=>st(o,s)!=="done"&&s.date<today()).length,al=$("alert");
+  al.hidden=!lateN;
+  if(lateN)al.textContent=diff>0?"Your launch is in "+diff+" days, so "+lateN+(lateN===1?" step is":" steps are")+" already behind the ideal schedule. Do those first, in order: they are marked Overdue.":lateN+(lateN===1?" step is":" steps are")+" overdue. They are marked in the plan.";
+  const pos=x=>Math.max(0,Math.min(100,(x+56)/86*100)),td=-diff,sh=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+  $("tlbar").innerHTML='<div class="track"><i style="flex:56;background:'+PH.b.c+'"></i><i style="flex:7;background:'+PH.l.c+'"></i><i style="flex:23;background:'+PH.a.c+'"></i></div>'
+    +steps.map(s=>'<span class="dot" data-s="'+st(o,s)+'" style="left:'+pos(s.off)+'%" title="'+s.title.replace(/"/g,"&quot;")+'"></span>').join("")
+    +(td>=-56&&td<=30?'<span class="today" style="left:'+pos(td)+'%"><b>Today</b></span>':"")
+    +'<div class="tll"><span>'+sh(steps[0].date)+'</span><span class="lz" style="left:'+pos(0)+'%">Launch · '+sh(launch)+'</span><span>'+sh(steps[steps.length-1].date)+'</span></div>';
   const nx=$("next");
   if(!cur)nx.innerHTML="<small>All done</small><h3>Every step is done. Nicely launched.</h3><p>Write your one-page review and keep what worked for the next launch.</p>";
   else{
@@ -305,22 +335,29 @@ function render(){
     nx.querySelector("h3").textContent=cur.title;nx.querySelector("p").textContent=cur.det;
   }
 }
-function text(){const o=load();return "Launch plan, launch date "+fmt(launch)+"\n\n"+["b","l","a"].map(p=>PH[p].n.toUpperCase()+"\n"+steps.filter(s=>s.ph===p).map(s=>"- "+fmt(s.date)+" ["+LBL[st(o,s)]+"] "+s.title).join("\n")).join("\n\n")}
+function text(){const o=load();return (nm()?nm()+": launch plan":"Launch plan")+", launch date "+fmt(launch)+"\n\n"+["b","l","a"].map(p=>PH[p].n.toUpperCase()+"\n"+steps.filter(s=>s.ph===p).map(s=>"- "+fmt(s.date)+" ["+LBL[st(o,s)]+"] "+s.title).join("\n")).join("\n\n")}
 function ics(){
   const pad=n=>String(n).padStart(2,"0"),ds=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
   const esc=t=>t.replace(/[\\,;]/g,m=>"\\"+m).replace(/\n/g,"\\n");
   const ev=steps.map(s=>{const e=new Date(s.date);e.setDate(e.getDate()+1);
-    return["BEGIN:VEVENT","UID:lp-"+ds(launch)+"-"+s.i+"@launch-planner","DTSTAMP:"+ds(new Date())+"T000000Z","DTSTART;VALUE=DATE:"+ds(s.date),"DTEND;VALUE=DATE:"+ds(e),"SUMMARY:"+esc("Launch: "+s.title),"DESCRIPTION:"+esc(s.det),"END:VEVENT"].join("\r\n")});
+    return["BEGIN:VEVENT","UID:lp-"+ds(launch)+"-"+s.i+"@launch-planner","DTSTAMP:"+ds(new Date())+"T000000Z","DTSTART;VALUE=DATE:"+ds(s.date),"DTEND;VALUE=DATE:"+ds(e),"SUMMARY:"+esc((nm()||"Launch")+": "+s.title),"DESCRIPTION:"+esc(s.det),"END:VEVENT"].join("\r\n")});
   const blob=new Blob(["BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Launch Planner//EN\r\n"+ev.join("\r\n")+"\r\nEND:VCALENDAR\r\n"],{type:"text/calendar"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="launch-plan.ics";document.body.appendChild(a);a.click();a.remove();
 }
 const flash=(b,t)=>{const o=b.dataset.o||b.textContent;b.dataset.o=o;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
 $("f").addEventListener("submit",e=>{e.preventDefault();build()});
 $("copy").addEventListener("click",e=>{(navigator.clipboard?navigator.clipboard.writeText(text()):Promise.reject()).then(()=>flash(e.target,"✓ Copied"),()=>flash(e.target,"Copy failed"))});
+$("share").addEventListener("click",e=>{const u=location.origin+location.pathname+"?d="+$("date").value+"&k="+val("kind")+"&a="+val("aud")+"&b="+val("bud");(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>flash(e.target,"✓ Link copied"),()=>flash(e.target,"Copy failed"))});
 $("print").addEventListener("click",()=>window.print());
 $("ics").addEventListener("click",ics);
 $("reset").addEventListener("click",()=>{save({});render()});
 const d=new Date();d.setDate(d.getDate()+60);$("date").value=d.toISOString().slice(0,10);
+const q=new URLSearchParams(location.search);
+if(/^\d{4}-\d\d-\d\d$/.test(q.get("d")||"")){
+  $("date").value=q.get("d");
+  [["kind","k"],["aud","a"],["bud","b"]].forEach(([n,k])=>{const v=q.get(k)||"";if(/^[a-z0-9]+$/.test(v)){const el=document.querySelector('input[name="'+n+'"][value="'+v+'"]');if(el)el.checked=true}});
+  build(true);
+}
 </script>
 </body>
 </html>
