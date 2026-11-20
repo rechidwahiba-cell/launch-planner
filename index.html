@@ -9,13 +9,13 @@
 <meta property="og:description" content="From launch date to a dated plan in 10 seconds.">
 <style>
 :root{
-  --bg:#FBF8F2;--card:#fff;--ink:#18223A;--mute:#5C6478;--line:#E9E2D3;
-  --p1:#14233F;--gold:#C9A45C;--gold-soft:#E3CC9A;
-  --before:#2B5C9E;--launch:#B07D1F;--after:#1F8A63;
-  --shadow:0 1px 2px rgba(20,35,63,.05),0 12px 32px -14px rgba(20,35,63,.2);
-  --hero:#0D182D;
+  --bg:#F6F8F7;--card:#fff;--ink:#0B0F0E;--mute:#5F6B66;--line:#E3E8E5;
+  --p1:#0B0F0E;--gold:#10B981;--gold-soft:#6EE7B7;
+  --before:#475569;--launch:#059669;--after:#0284C7;
+  --shadow:0 1px 2px rgba(11,15,14,.05),0 12px 32px -14px rgba(11,15,14,.22);
+  --hero:#0B0F0E;
 }
-@media (prefers-color-scheme:dark){:root{--bg:#0B1322;--card:#132038;--ink:#F5EFE3;--mute:#A3ABBD;--line:#24324F;--p1:#E3CC9A;--before:#7FA8E0;--launch:#E3CC9A;--after:#5FCFA0;--shadow:0 12px 32px -12px rgba(0,0,0,.6)}}
+@media (prefers-color-scheme:dark){:root{--bg:#0B0F0E;--card:#141A18;--ink:#F2F5F3;--mute:#9AA6A0;--line:#26302C;--p1:#6EE7B7;--before:#94A3B8;--launch:#34D399;--after:#38BDF8;--shadow:0 12px 32px -12px rgba(0,0,0,.6)}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
@@ -23,13 +23,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-ap
 
 /* hero */
 .hero{background:var(--hero);color:#fff;position:relative;overflow:hidden;padding:56px 0 120px}
-.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(201,164,92,.32),transparent);filter:blur(10px)}
-.hero:after{content:"";position:absolute;inset:auto auto -50% -15%;width:600px;height:600px;background:radial-gradient(closest-side,rgba(43,92,158,.55),transparent)}
+.hero:before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(16,185,129,.38),transparent);filter:blur(10px)}
+.hero:after{content:"";position:absolute;inset:auto auto -50% -15%;width:600px;height:600px;background:radial-gradient(closest-side,rgba(16,185,129,.16),transparent)}
 .hero .wrap{position:relative;z-index:1}
 .eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)}
 .eyebrow i{width:7px;height:7px;border-radius:50%;background:#3fd6a0;box-shadow:0 0 0 4px rgba(63,214,160,.25)}
 h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;letter-spacing:-.03em;margin:20px 0 14px;font-weight:800}
-h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(135deg,#E3CC9A,#C9A45C)}
+h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(135deg,#6EE7B7,#10B981)}
 .hero p{max-width:540px;margin:0;color:rgba(255,255,255,.75);font-size:1.1rem}
 
 /* form */
@@ -44,12 +44,12 @@ h1 em{font-style:normal;-webkit-background-clip:text;background-clip:text;color:
 .seg span{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;font-weight:600;font-size:.95rem;transition:.15s;background:var(--bg);height:100%}
 .seg small{font-weight:400;color:var(--mute);font-size:.8rem}
 .seg input:hover+span{border-color:var(--p1)}
-.seg input:focus-visible+span{outline:3px solid rgba(201,164,92,.7);outline-offset:2px}
+.seg input:focus-visible+span{outline:3px solid rgba(16,185,129,.6);outline-offset:2px}
 .seg input:checked+span{border-color:var(--p1);background:color-mix(in srgb,var(--gold) 16%,var(--card));box-shadow:inset 0 0 0 1px var(--p1)}
 input[type=date],input[type=text]{font:inherit;font-weight:600;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}
-input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,.7);border-color:var(--p1)}
-.cta{font:inherit;font-weight:700;font-size:1.05rem;color:#14233F;border:0;border-radius:14px;padding:16px 22px;background:linear-gradient(135deg,#E3CC9A,#C9A45C);cursor:pointer;box-shadow:0 10px 24px -8px rgba(201,164,92,.65);transition:transform .15s,box-shadow .15s}
-.cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(201,164,92,.65)}
+input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(16,185,129,.6);border-color:var(--p1)}
+.cta{font:inherit;font-weight:700;font-size:1.05rem;color:#04130D;border:0;border-radius:14px;padding:16px 22px;background:#10B981;cursor:pointer;box-shadow:0 10px 24px -8px rgba(16,185,129,.5);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(16,185,129,.5)}
 .cta:active{transform:none}
 
 /* results */
@@ -69,7 +69,7 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,
 .strip i.on{opacity:1}
 .legend{display:flex;justify-content:space-between;font-size:.78rem;color:var(--mute);font-weight:600}
 
-.next{margin-top:22px;border-radius:18px;padding:20px 22px;background:linear-gradient(135deg,#14233F,#1F3A66);border-left:5px solid var(--gold);color:#fff;box-shadow:0 18px 40px -16px rgba(201,164,92,.65)}
+.next{margin-top:22px;border-radius:18px;padding:20px 22px;background:#0F1614;border:1px solid #26302C;border-left:5px solid var(--gold);color:#fff;box-shadow:0 18px 40px -16px rgba(16,185,129,.5)}
 .next small{color:var(--gold-soft);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem}
 .next h3{margin:4px 0 4px;font-size:1.25rem}
 .next p{margin:0;opacity:.9;font-size:.95rem}
@@ -104,7 +104,7 @@ input[type=date]:focus,input[type=text]:focus{outline:3px solid rgba(201,164,92,
 .r.is-done .rt span{text-decoration:line-through;color:var(--mute)}
 .rx{padding:0 12px 12px 96px;color:var(--mute);font-size:.9rem}
 .st{font:inherit;font-size:.8rem;font-weight:700;padding:6px 26px 6px 10px;border-radius:99px;border:0;cursor:pointer;color:var(--s);background:color-mix(in srgb,var(--s) 15%,var(--card)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23888' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 9px center;appearance:none}
-.st:focus-visible,.rt:focus-visible,.tab:focus-visible,.chip:focus-visible{outline:3px solid rgba(201,164,92,.7);outline-offset:2px}
+.st:focus-visible,.rt:focus-visible,.tab:focus-visible,.chip:focus-visible{outline:3px solid rgba(16,185,129,.6);outline-offset:2px}
 .empty{padding:22px;text-align:center;color:var(--mute);font-size:.92rem}
 [data-s=todo]{--s:#7b7a94}[data-s=doing]{--s:#2f7fe0}[data-s=ordered]{--s:#d98a00}[data-s=valid]{--s:#0E8F9E}[data-s=done]{--s:#12a574}
 @media(max-width:560px){.rh{grid-template-columns:1fr auto}.rd{grid-column:1/-1;display:flex;gap:8px}.rd small{display:inline}.rx{padding-left:12px}.tab small{display:none}}
@@ -379,7 +379,7 @@ function xlsx(){
   const dx=(bg,fg)=>'<dxf><font><b/><color rgb="FF'+fg+'"/></font><fill><patternFill><bgColor rgb="FF'+bg+'"/></patternFill></fill></dxf>';
   const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="ddd d mmm yyyy"/></numFmts>'
     +'<fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font><font><b/><sz val="15"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>'
-    +'<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1F2937"/></patternFill></fill></fills>'
+    +'<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B0F0E"/></patternFill></fill></fills>'
     +'<borders count="2"><border/><border><bottom style="thin"><color rgb="FFE5E7EB"/></bottom></border></borders><cellStyleXfs count="1"><xf/></cellStyleXfs>'
     +'<cellXfs count="6"><xf/><xf fontId="1" fillId="2" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="164" borderId="1" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment horizontal="left" vertical="top"/></xf><xf borderId="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf><xf fontId="2" applyFont="1"/><xf fontId="3" borderId="1" applyFont="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf></cellXfs>'
     +'<dxfs count="4">'+dx("D1FAE5","065F46")+dx("CFFAFE","155E75")+dx("FEF3C7","92400E")+dx("DBEAFE","1E40AF")+"</dxfs></styleSheet>";
