@@ -1,5 +1,7 @@
 # Launch Planner
 
+Try it: **[rechidwahiba-cell.github.io/launch-planner](https://rechidwahiba-cell.github.io/launch-planner/)**
+
 Pick a launch date and a few options, and get a dated launch plan in four phases: strategy, production, launch week and after the launch.
 
 - Three different plans: digital product, service, or programme and event
