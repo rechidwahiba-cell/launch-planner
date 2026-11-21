@@ -22,4 +22,8 @@ Pick a launch date and a few options, and get a dated launch plan in four phases
 
 A single HTML file with no framework, no build step and no server. The plan comes from a list of steps with offsets in days from the launch date, filtered by the options chosen. The Excel file is generated in the browser. Statuses and edits are saved in the browser only: nothing is sent anywhere.
 
-By [Wahiba Rechid](https://wahiba-rechid.vercel.app/), built with an AI coding assistant.
+By W.R., built with an AI coding assistant.
+
+## Disclaimer
+
+This tool was developed independently by one person, from personal professional experience. It is a free aid provided as is, for general information only, with no guarantee that it is complete, accurate, up to date or suited to your situation. It is not professional, legal or technical advice. You are solely responsible for how you use it and for the decisions you make with it, and the author accepts no liability for any loss or damage arising from its use. Product and company names are mentioned for reference only: this tool is not affiliated with or endorsed by any of them.
